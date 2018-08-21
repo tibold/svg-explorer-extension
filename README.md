@@ -8,6 +8,12 @@ Installation: From _[Releases](https://github.com/maphew/svg-explorer-extension/
     DEL "%localappdata%\IconCache.db" /A
     explorer.exe
 
+I imported the svg-explorer-extension from CodePlex posted here to GitHub because I use the extension and I didn't want to lose access to it when CodePlex shut down in 2017. 
+
+I'm primarily a python guy and am ill equipped to maintaining this project. So if you know C++ and have some time to spare, please feel free to take over! In the meantime I'm happy to merge pull requests for those who care to offer drive-by fixin's but can't vet them for quality or completeness. ;-)
+
+--Matt
+
 Original readme follows:
 
 -----
