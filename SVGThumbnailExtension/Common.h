@@ -28,7 +28,7 @@ STDAPI_(HINSTANCE) DllInstance();
 DEFINE_GUID(CLSID_SampleThumbnailProvider,
 0x4ca20d9a, 0x98ac, 0x4dd6, 0x9c, 0x16, 0x74, 0x49, 0xf2, 0x9a, 0xc0, 0x8a);
 
-#include <QtGui/QApplication>
+#include <QtWidgets/QApplication>
 #include <QtSvg/QSvgRenderer>
 
 #endif // SVGTHUMBNAILEXTENSION_GLOBAL_H
