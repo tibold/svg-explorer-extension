@@ -104,7 +104,8 @@ STDMETHODIMP CThumbnailProvider::GetThumbnail(UINT cx,
 
     QFile * f = new QFile("C:\\dev\\svg.log");
     f->open(QFile::Append);
-    f->write(QString("Size: %1 \n.").arg(cx).toAscii());
+//    f->write(QString("Size: %1 \n.").arg(cx).toAscii());
+    f->write(QString("Size: %1 \n.").arg(cx).toUtf8());
     f->flush();
     f->close();
 
