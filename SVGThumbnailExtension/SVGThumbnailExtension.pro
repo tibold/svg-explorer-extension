@@ -28,6 +28,10 @@ HEADERS +=\
     ClassFactory.h \
     Common.h
 
+INCLUDEPATH +=\
+    $$quote("C:/Program Files (x86)/Windows Kits/10/Include/10.0.17763.0/um") \
+    $$quote("C:/Program Files (x86)/Windows Kits/10/Include/10.0.17763.0/shared")
+
 symbian {
     MMP_RULES += EXPORTUNFROZEN
     TARGET.UID3 = 0xE6F54BF5
