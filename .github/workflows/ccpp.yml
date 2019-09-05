@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: init vs studio
-      run: ""C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\Common7\\tools\\vcvars64.bat""
+      run: 'C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\Common7\\tools\\vcvars64.bat'
     - name: configure
       run: configure
     - name: make
