@@ -9,6 +9,8 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
+    - name: init vs studio
+      run: vcvarsall.bat
     - name: configure
       run: configure
     - name: make
