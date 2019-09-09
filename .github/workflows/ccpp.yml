@@ -17,6 +17,7 @@ jobs:
       run: |
         call "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\Common7\\tools\\vcvars64.bat"
         win32/configure.bat
+        dir /s "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\Common7"
     - name: nmake
       run: |
         call "C:\Program Files (x86)\Microsoft Visual Studio\${{ matrix.vs }}\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
