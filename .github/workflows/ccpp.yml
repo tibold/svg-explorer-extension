@@ -12,13 +12,18 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
-    - name: init vs studio
-      run: call "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\Common7\\tools\\vcvars64.bat"
-    - name: configure
-      run: configure
-    - name: make
-      run: make
-    - name: make check
-      run: make check
-    - name: make distcheck
-      run: make distcheck
+    - name: init vs studio (configure)
+        # adapted from https://github.community/t5/GitHub-Actions/Windows-syntax-for-Run-path-with-spaces/m-p/30803#M569 
+      run: |
+        call "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\Common7\\tools\\vcvars64.bat"
+        win32/configure.bat
+    - name: nmake
+      run: |
+        call "C:\Program Files (x86)\Microsoft Visual Studio\${{ matrix.vs }}\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+        set YACC=win_bison
+        nmake up
+        nmake
+#    - name: make distcheck
+#      run: make distcheck
+
+
