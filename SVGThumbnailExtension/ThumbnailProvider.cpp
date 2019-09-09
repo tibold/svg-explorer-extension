@@ -4,6 +4,7 @@
 #include <QtGui/QImage>
 #include <QtGui/QPixmap>
 #include <QtGui/QPainter>
+#include <QtWin>
 #include <QtCore/QFile>
 #include <QString>
 #include <QDateTime>
@@ -138,7 +139,14 @@ STDMETHODIMP CThumbnailProvider::GetThumbnail(UINT cx,
 #ifndef NDEBUG
     device->save(QString("C:\\dev\\%1.png").arg(QDateTime::currentMSecsSinceEpoch()), "PNG");
 #endif
-    *phbmp = QPixmap::fromImage(*device).toWinHBITMAP(QPixmap::Alpha);
+    // Issue #19, https://github.com/maphew/svg-explorer-extension/issues/19
+    // Old syntax: HBITMAP QPixmap::toWinHBITMAP(HBitmapFormat format = NoAlpha) const
+    // New syntax: HBITMAP QtWin::toHBITMAP(const QPixmap &p, QtWin::HBitmapFormat format = HBitmapNoAlpha)
+    //
+    // Old code:
+    //*phbmp = QPixmap::fromImage(*device).toWinHBITMAP(QPixmap::Alpha);
+    // new test code:
+    *phbmp = QtWin::fromImage(*device).toHBITMAP(QPixmap::Alpha);
     assert(*phbmp != NULL);
 
     delete painter;

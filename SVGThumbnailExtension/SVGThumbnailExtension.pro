@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += svg
+QT       += winextras
 
 TARGET = SVGThumbnailExtension
 TEMPLATE = lib
