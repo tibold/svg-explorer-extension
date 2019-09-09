@@ -14,7 +14,23 @@ I'm primarily a python guy and am ill equipped to maintaining this project. So i
 
 --Matt
 
-Original readme follows:
+## Build Environment c.2019
+Warning: it's many GB. 
+
+- QtCreator -  `choco install qtcreator`
+- Qt SDK - _MSVC 2017 64-bit_ using Qt Maintenance Tool installed with QtCreator. Might be problems if install MSVC 32 bit at same time.
+- MS Visual Studio - build tools only else many many GB! Reboots necessary, [read the notes](https://chocolatey.org/packages/visualstudio2017buildtools)
+  - `choco install visualstudio2017buildtools` 
+  - `choco install visualstudio2017-workload-vctools`
+- Windows SDK - `choco install windows-sdk-10.-0`
+
+Installation is with [Chocolatey ](https://chocolatey.org/) wherever I have a choice. The list may be incomplete. I've installed and uninstalled several different programs and versions of programs trying to find the right combination.
+
+More info: https://github.com/maphew/svg-explorer-extension/issues/18
+
+
+-----
+*Original readme follows:*
 
 -----
 # SVG Viewer Extension for Windows Explorer
