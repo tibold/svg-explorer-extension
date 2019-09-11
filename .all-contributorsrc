@@ -2,7 +2,7 @@
   "files": [
     "README.md"
   ],
-  "imageSize": 100,
+  "imageSize": 32,
   "commit": false,
   "contributors": [
     {
@@ -15,7 +15,7 @@
       ]
     }
   ],
-  "contributorsPerLine": 7,
+  "contributorsPerLine": 2,
   "projectName": "svg-explorer-extension",
   "projectOwner": "maphew",
   "repoType": "github",
