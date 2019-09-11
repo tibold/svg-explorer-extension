@@ -49,8 +49,8 @@ Thank you's for helping make this a better project _([emoji key](https://allcont
 <!-- prettier-ignore -->
 <table>
   <tr>
-    <td align="center"><a href="http://telcontar.net/"><img src="https://avatars3.githubusercontent.com/u/5874930?v=4" width="32px;" alt="Daniel Beardsmore"/><br /><sub><b>Daniel Beardsmore</b></sub></a><br /><a href="https://github.com/maphew/svg-explorer-extension/commits?author=Daniel-Beardsmore" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/GitMensch"><img src="https://avatars3.githubusercontent.com/u/6699539?v=4" width="32px;" alt="Simon Sobisch"/><br /><sub><b>Simon Sobisch</b></sub></a><br /><a href="https://github.com/maphew/svg-explorer-extension/commits?author=GitMensch" title="Documentation">📖</a></td>
+    <td><a href="http://telcontar.net/"><img align="middle" src="https://avatars3.githubusercontent.com/u/5874930?v=4" width="32px;" alt="Daniel Beardsmore"/> <b>Daniel Beardsmore</b></a><br /><a href="https://github.com/maphew/svg-explorer-extension/commits?author=Daniel-Beardsmore" title="Code">💻</a></td>
+    <td> <a href="https://github.com/GitMensch"><img align="middle" src="https://avatars3.githubusercontent.com/u/6699539?v=4" width="32px;" alt="Simon Sobisch"/> <b>Simon Sobisch</b> </a> <a href="https://github.com/maphew/svg-explorer-extension/commits?author=GitMensch" title="Documentation">📖</a></td>
   </tr>
 </table>
 
