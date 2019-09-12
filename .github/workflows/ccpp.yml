@@ -15,10 +15,10 @@ jobs:
     - name: init vs studio (configure)
         # adapted from https://github.community/t5/GitHub-Actions/Windows-syntax-for-Run-path-with-spaces/m-p/30803#M569 
       run: |
-        tree "C:\\Program Files (x86)\\Microsoft Visual Studio"        
+        dir/s/b "C:\\Program Files (x86)\\Microsoft Visual Studio\\vcvars*.bat"        
         #call "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\Common7\\tools\\vcvars64.bat"
         #win32/configure.bat
-        dir /s "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\Common7"
+        #dir /s "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\Common7"
     - name: nmake
       run: |
         call "C:\Program Files (x86)\Microsoft Visual Studio\${{ matrix.vs }}\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
