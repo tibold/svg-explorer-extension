@@ -9,25 +9,46 @@ jobs:
   build:
 
     runs-on: windows-latest
-    
+
+    ## copied verbatim from docs
+    ## https://help.github.com/en/articles/workflow-syntax-for-github-actions#about-yaml-syntax-for-workflows
+    ##
+    # Example running a script using Windows cmd:
     steps:
-    - uses: actions/checkout@v1
-    - name: init vs studio (configure)
+      - name: Display the path
+        run: echo %PATH%
+        shell: cmd
+    # Example running a script using PowerShell Core:
+    steps:
+      - name: Display the path
+        run: echo ${env:PATH}
+        shell: pwsh
+    # Example running a python script:
+    steps:
+      - name: Display the path
+        run: |
+          import os
+          print(os.environ['PATH'])
+        shell: python        
+    
+    # steps:
+    #- uses: actions/checkout@v1
+    # - name: init vs studio (configure)
         # adapted from https://github.community/t5/GitHub-Actions/Windows-syntax-for-Run-path-with-spaces/m-p/30803#M569 
-      run: |
-        cd "C:/Program Files (x86)/Microsoft Visual Studio/"
-        echo %cd%
-        rem dir /s/b vcvars*.bat
-        rem dir /s/b *.bat
-        echo dir /s/b "c:/Program Files (x86)/*.bat" >t.bat
-        t.bat
-        cd /
-        dir /s/b *.bat
-    - name: nmake
-      run: |
-        call "C:\Program Files (x86)\Microsoft Visual Studio\${{ matrix.vs }}\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
-        set YACC=win_bison
-        nmake up
-        nmake
+      # run: |
+        # cd "C:/Program Files (x86)/Microsoft Visual Studio/"
+        # echo %cd%
+        # rem dir /s/b vcvars*.bat
+        # rem dir /s/b *.bat
+        # echo dir /s/b "c:/Program Files (x86)/*.bat" >t.bat
+        # t.bat
+        # cd /
+        # dir /s/b *.bat
+    # - name: nmake
+      # run: |
+        # call "C:\Program Files (x86)\Microsoft Visual Studio\${{ matrix.vs }}\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+        # set YACC=win_bison
+        # nmake up
+        # nmake
 #    - name: make distcheck
 #      run: make distcheck
