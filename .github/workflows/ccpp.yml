@@ -22,8 +22,11 @@ jobs:
         run: |
             rem choco install windows-sdk-10
                 :: fails with exit code 2008, see https://chocolatey.org/packages/windows-sdk-10.1#comment-4196624327
+            echo curl -o "%temp%/winsdksetup.exe" "https://download.microsoft.com/download/9/3/9/939441D4-6FBA-48EE-9EF7-402C1AA8B8A7/windowssdk/winsdksetup.exe"
             curl -o "%temp%/winsdksetup.exe" "https://download.microsoft.com/download/9/3/9/939441D4-6FBA-48EE-9EF7-402C1AA8B8A7/windowssdk/winsdksetup.exe"
-            %temp%/winsdksetup.exe /Quiet /NoRestart /Log "%temp%/windows-sdk-install.log"
+            echo "%temp%/winsdksetup.exe" /Quiet /NoRestart /Log "%temp%/windows-sdk-install.log"
+            "%temp%/winsdksetup.exe" /Quiet /NoRestart /Log "%temp%/windows-sdk-install.log"
+            echo type "%temp%/windows-sdk-install.log"
             type "%temp%/windows-sdk-install.log"
             
       - name: install MS build tools
