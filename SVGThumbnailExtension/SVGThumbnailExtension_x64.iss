@@ -32,8 +32,9 @@ Source: "x64\release\QtGui4.dll"; DestDir: "{app}";
 Source: "x64\release\QtSvg4.dll"; DestDir: "{app}";
 Source: "..\SVGThumbnailExtension-build-x64_Release\release\SVGThumbnailExtension.dll"; DestDir: "{app}"; Flags: regserver
 ; Licenses
+; FIXME: the qt license should not be stored in this repository but be copied from the qt distribution
 Source: "license\Qt.txt"; DestDir: "{app}\license\";
-Source: "license.txt"; DestDir: "{app}\license\";
+Source: "../LICENSE.md"; DestDir: "{app}\license\";
 
 [Code]
 
