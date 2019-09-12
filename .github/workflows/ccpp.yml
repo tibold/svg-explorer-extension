@@ -15,16 +15,23 @@ jobs:
     ##
     # Example running a script using Windows cmd:
     steps:
-      - name: Display the path
+      - name: install MS build tools
+        run: choco install visualstudio2019buildtools visualstudio2019-workload-vctools windows-sdk-10.-0
+      - name: install Qt
+        run: |
+            echo --- Qt install cmd goes here ---
+      - name: Set VS env
         run: |
             rem echo %PATH%
             pushd "C:/Program Files (x86)/Microsoft Visual Studio"
-            echo %cd%
-            dir /ad
-            echo --- after 'dir /ad'
-            dir /s/b *.bat
-            echo --- after 'dir /s/b *.bat'
+            echo %cd%            
+            :: Uncomment to find all bats in this tree
+            rem dir /s/b *.bat
+            "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
+            cmake --version
+            echo --- The build cmd goes here, when we figure out what that is ---
         shell: cmd
+        
     # # Example running a script using PowerShell Core:
       # - name: Display the path
         # run: echo ${env:PATH}
