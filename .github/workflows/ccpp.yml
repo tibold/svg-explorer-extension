@@ -17,7 +17,11 @@ jobs:
       run: |
         cd "C:/Program Files (x86)/Microsoft Visual Studio/"
         echo %cd%
-        dir /s/b vcvars*.bat
+        rem dir /s/b vcvars*.bat
+        rem dir /s/b *.bat
+        echo dir /s/b "c:/Program Files (x86)/*.bat" >t.bat
+        t.bat
+        cd /
         dir /s/b *.bat
     - name: nmake
       run: |
