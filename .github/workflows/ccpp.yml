@@ -16,18 +16,22 @@ jobs:
     # Example running a script using Windows cmd:
     steps:
       - name: Display the path
-        run: echo %PATH%
-        shell: cmd
-    # Example running a script using PowerShell Core:
-      - name: Display the path
-        run: echo ${env:PATH}
-        shell: pwsh
-    # Example running a python script:
-      - name: Display the path
         run: |
-          import os
-          print(os.environ['PATH'])
-        shell: python        
+            echo %PATH%
+            echo %cd%
+            dir /ad
+            echo --- after 'dir /ad'
+        shell: cmd
+    # # Example running a script using PowerShell Core:
+      # - name: Display the path
+        # run: echo ${env:PATH}
+        # shell: pwsh
+    # # Example running a python script:
+      # - name: Display the path
+        # run: |
+          # import os
+          # print(os.environ['PATH'])
+        # shell: python        
     
     # steps:
     #- uses: actions/checkout@v1
