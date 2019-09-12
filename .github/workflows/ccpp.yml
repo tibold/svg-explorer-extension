@@ -16,7 +16,9 @@ jobs:
         # adapted from https://github.community/t5/GitHub-Actions/Windows-syntax-for-Run-path-with-spaces/m-p/30803#M569 
       run: |
         cd "C:/Program Files (x86)/Microsoft Visual Studio/"
+        echo %cd%
         dir /s/b vcvars*.bat
+        dir /s/b *.bat
     - name: nmake
       run: |
         call "C:\Program Files (x86)\Microsoft Visual Studio\${{ matrix.vs }}\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
