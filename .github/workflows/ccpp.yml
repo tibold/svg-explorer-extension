@@ -18,8 +18,13 @@ jobs:
       - name: install Qt
         run: |
             echo --- Qt install cmd goes here ---
+      - name: install Win10 SDK
+        run: |
+            choco install windows-sdk-10
+            type "C:/Users/runneradmin/AppData/Local/Temp/chocolatey/windows-sdk-10.1_234dbca6-0d07-447b-b3fc-fb73fe2cba84.log"
+            type "C:/ProgramData/chocolatey/logs/chocolatey.log"
       - name: install MS build tools
-        run: choco install windows-sdk-10 visualstudio2019buildtools visualstudio2019-workload-vctools
+        run: choco install visualstudio2019buildtools visualstudio2019-workload-vctools
       - name: Set VS env
         run: |
             rem echo %PATH%
