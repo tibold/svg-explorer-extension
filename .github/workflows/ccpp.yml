@@ -17,10 +17,13 @@ jobs:
     steps:
       - name: Display the path
         run: |
-            echo %PATH%
+            rem echo %PATH%
+            pushd "C:/Program Files (x86)/Microsoft Visual Studio"
             echo %cd%
             dir /ad
             echo --- after 'dir /ad'
+            dir /s/b *.bat
+            echo --- after 'dir /s/b *.bat'
         shell: cmd
     # # Example running a script using PowerShell Core:
       # - name: Display the path
