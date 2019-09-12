@@ -20,11 +20,15 @@ jobs:
             echo --- Qt install cmd goes here ---
       - name: install Win10 SDK
         run: |
-            choco install windows-sdk-10
-            type "C:/Users/runneradmin/AppData/Local/Temp/chocolatey/windows-sdk-10.1_234dbca6-0d07-447b-b3fc-fb73fe2cba84.log"
-            type "C:/ProgramData/chocolatey/logs/chocolatey.log"
+            rem choco install windows-sdk-10
+                :: fails with exit code 2008, see https://chocolatey.org/packages/windows-sdk-10.1#comment-4196624327
+            curl -o "%temp%/winsdksetup.exe" "https://download.microsoft.com/download/9/3/9/939441D4-6FBA-48EE-9EF7-402C1AA8B8A7/windowssdk/winsdksetup.exe"
+            %temp%/winsdksetup.exe /Quiet /NoRestart /Log "%temp%/windows-sdk-install.log"
+            type "%temp%/windows-sdk-install.log"
+            
       - name: install MS build tools
         run: choco install visualstudio2019buildtools visualstudio2019-workload-vctools
+
       - name: Set VS env
         run: |
             rem echo %PATH%
