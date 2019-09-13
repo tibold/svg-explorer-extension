@@ -1,0 +1,77 @@
+language: cpp
+matrix:
+  include:
+  - os: linux
+    dist: xenial
+    before_install:
+    - sudo apt-get update -qq
+    - sudo apt-get install devscripts build-essential lintian dh-make
+    - sudo apt-get install qtdeclarative5-dev qt5-default libjack-jackd2-dev
+    compiler:
+    - clang
+    - gcc
+    script:
+    - echo $TRAVIS_TAG
+    - qmake Jamulus.pro
+    - make
+    #ssh-key & deploy function is only available in travis-ci.com (not free) but not in travis-ci.org (free)
+    #deploy:
+    #  provider: releases
+    #  api_key:
+    #    secure: aQ93/8XU3HEGTif0/rSiF+gcm4uRhyWFdr3Va50BprwQOrZkNg8zIMwIKKODwjLDqxaH4msgNYutcr/VLdLjo4YP43It0UIfv3LGa2VFAkFhuQurMXZlVyx8RhIGLjIaWVWN1GCbNdAQwWNNo2mAkEdRaBrj/26geZotGcYZiztGwTAdy0t/vyYjO1sLZdBKcf7dJ06Pm2ktZO/rDyE4UtCTQiRfqLCKsQ/SILbewOMG/auaSUdU0utsbvXxr+dCzqBPwdSSptWqhIORXORL5oPn6242URzIJkmw5XPwhSabhdbzUjCIN9E24z1vp+cffAohuGXyXXZy9/bGeKa0mXfAaXV+TnJkpMd+i3fN5dY+vhFrlLOpRojRK6NqvaMID6tcNNtZMmFSgaZGyCUJQn4/0X+LdPwvK3/dXY+qElJW62QiJmQAt9OBGcq8EFqQDmEtRivRlbpbERsd/IJoOxP7nI2T00g04uV543ZmhU4fmGw6MVPAlIGRsBECjB0AMTp+3xW3OaUp7jy3WZpZXRrXNI41nZogrxhevPME1BRNk3V+MWQo8R3C+bIaCa5Um/3DZxnMxZgXjI9yzzR7Z8f4RWaQCKjXx41/pk7jxm1TcEyBfRVsb313l/fRLg+fjCmaEnnxu43333XGIv4eIyAGDR8ydF2VpmyP2ejzh8I=
+    #  file:
+    #  - Jamulus
+    #  skip_cleanup: true
+    #  on:
+    #    repo: braindef/jamulus
+    #    tags: true
+  - os: osx
+    osx_image: xcode7.2
+    before_install:
+    - brew install qt5
+    - brew link qt5 --force
+    script:
+    - qmake -spec macx-xcode Jamulus.pro
+    - xcodebuild -list -project Jamulus.xcodeproj
+    - xcodebuild -scheme Jamulus build
+    #ssh-key & deploy function is only available in travis-ci.com (not free) but not in travis-ci.org (free)
+    #deploy:
+    #  provider: releases
+    #  api_key:
+    #    secure: aQ93/8XU3HEGTif0/rSiF+gcm4uRhyWFdr3Va50BprwQOrZkNg8zIMwIKKODwjLDqxaH4msgNYutcr/VLdLjo4YP43It0UIfv3LGa2VFAkFhuQurMXZlVyx8RhIGLjIaWVWN1GCbNdAQwWNNo2mAkEdRaBrj/26geZotGcYZiztGwTAdy0t/vyYjO1sLZdBKcf7dJ06Pm2ktZO/rDyE4UtCTQiRfqLCKsQ/SILbewOMG/auaSUdU0utsbvXxr+dCzqBPwdSSptWqhIORXORL5oPn6242URzIJkmw5XPwhSabhdbzUjCIN9E24z1vp+cffAohuGXyXXZy9/bGeKa0mXfAaXV+TnJkpMd+i3fN5dY+vhFrlLOpRojRK6NqvaMID6tcNNtZMmFSgaZGyCUJQn4/0X+LdPwvK3/dXY+qElJW62QiJmQAt9OBGcq8EFqQDmEtRivRlbpbERsd/IJoOxP7nI2T00g04uV543ZmhU4fmGw6MVPAlIGRsBECjB0AMTp+3xW3OaUp7jy3WZpZXRrXNI41nZogrxhevPME1BRNk3V+MWQo8R3C+bIaCa5Um/3DZxnMxZgXjI9yzzR7Z8f4RWaQCKjXx41/pk7jxm1TcEyBfRVsb313l/fRLg+fjCmaEnnxu43333XGIv4eIyAGDR8ydF2VpmyP2ejzh8I=
+    #  file:
+    #  - Jamulus.app
+    #  skip_cleanup: true
+    #  on:
+    #    repo: braindef/jamulus
+    #    tags: true
+  - os: windows
+    before_install:
+    - dir C:/Program\ Files\ \(x86\)/Windows\ Kits/10/bin/10.0.17134.0/x64
+    - cmd.exe /C 'cd && "C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvarsall.bat"
+      x86 && cd && cd "C:/Users/travis/build/braindef/jamulus" && dir'
+    - curl -vLO http://download.qt.io/official_releases/online_installers/qt-unified-windows-x86-online.exe
+    - curl -vLO http://www.steinberg.net/sdk_downloads/ASIOSDK2.3.2.zip
+    - unzip ASIOSDK2.3.2.zip
+    - mkdir windows/ASIOSDK2
+    - cp -rvu ASIOSDK2.3.2/* windows/ASIOSDK2
+    - "./qt-unified-windows-x86-online.exe --verbose --script qt-installer-windows.qs"
+    - ls -la C:/Qt/5.12.3/msvc2017/bin/qtenv2.bat
+    script:
+    - cmd.exe /C 'cd && "C:\Qt\5.12.3\msvc2017\bin\qtenv2.bat" && cd && "C:\Program
+      Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvarsall.bat"
+      x86 && cd "C:\Users\travis\build\braindef\jamulus" && cd && qmake Jamulus.pro
+      && nmake'
+    #ssh-key & deploy function is only available in travis-ci.com (not free) but not in travis-ci.org (free)
+    #deploy:
+    #  provider: releases
+    #  api_key:
+    #    secure: aQ93/8XU3HEGTif0/rSiF+gcm4uRhyWFdr3Va50BprwQOrZkNg8zIMwIKKODwjLDqxaH4msgNYutcr/VLdLjo4YP43It0UIfv3LGa2VFAkFhuQurMXZlVyx8RhIGLjIaWVWN1GCbNdAQwWNNo2mAkEdRaBrj/26geZotGcYZiztGwTAdy0t/vyYjO1sLZdBKcf7dJ06Pm2ktZO/rDyE4UtCTQiRfqLCKsQ/SILbewOMG/auaSUdU0utsbvXxr+dCzqBPwdSSptWqhIORXORL5oPn6242URzIJkmw5XPwhSabhdbzUjCIN9E24z1vp+cffAohuGXyXXZy9/bGeKa0mXfAaXV+TnJkpMd+i3fN5dY+vhFrlLOpRojRK6NqvaMID6tcNNtZMmFSgaZGyCUJQn4/0X+LdPwvK3/dXY+qElJW62QiJmQAt9OBGcq8EFqQDmEtRivRlbpbERsd/IJoOxP7nI2T00g04uV543ZmhU4fmGw6MVPAlIGRsBECjB0AMTp+3xW3OaUp7jy3WZpZXRrXNI41nZogrxhevPME1BRNk3V+MWQo8R3C+bIaCa5Um/3DZxnMxZgXjI9yzzR7Z8f4RWaQCKjXx41/pk7jxm1TcEyBfRVsb313l/fRLg+fjCmaEnnxu43333XGIv4eIyAGDR8ydF2VpmyP2ejzh8I=
+    #  file:
+    #  - Jamulus.exe
+    #  skip_cleanup: true
+    #  on:
+    #    repo: braindef/jamulus
+    #    tags: true
+
+
