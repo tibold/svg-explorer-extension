@@ -32,7 +32,7 @@ Controller.prototype.WelcomePageCallback = function() {
     console.log("Step: " + gui.currentPageWidget());
     // At least for 3.0.4 immediately clicking Next fails, so wait a bit.
     // https://github.com/benlau/qtci/commit/85cb986b66af4807a928c70e13d82d00dc26ebf0
-    gui.clickButton(buttons.NextButton, 1000);
+    gui.clickButton(buttons.NextButton, 2000);
 };
 
 Controller.prototype.CredentialsPageCallback = function() {

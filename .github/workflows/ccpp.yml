@@ -18,20 +18,14 @@ jobs:
       - uses: actions/checkout@master
       - name: install Qt
         run: |
-            echo --- Qt install cmd script ---
-            echo %~dpnx0
+            @echo on
+            @echo --- Qt install cmd script %~dpnx0
             pushd %GITHUB_WORKSPACE%
-            echo %cd%
-            dir
-            echo cmd: pushd tools
+            @echo %cd%
             pushd tools
-            echo cmd: dir /s/b *.qs
-            dir /s/b *.qs
-            echo cmd: type qt-installer-windows.qs
-            type qt-installer-windows.qs
-            echo cmd: curl -vLo qt-unified-windows-x86-online.exe http://download.qt.io/official_releases/online_installers/qt-unified-windows-x86-online.exe
+            rem @echo cmd: curl -vLo qt-unified-windows-x86-online.exe http://download.qt.io/official_releases/online_installers/qt-unified-windows-x86-online.exe
             curl -vLo qt-unified-windows-x86-online.exe http://download.qt.io/official_releases/online_installers/qt-unified-windows-x86-online.exe
-            echo cmd: qt-unified-windows-x86-online.exe --verbose --script qt-installer-windows.qs
+            rem @echo cmd: qt-unified-windows-x86-online.exe --verbose --script qt-installer-windows.qs
             qt-unified-windows-x86-online.exe --verbose --script qt-installer-windows.qs
             
       - name: install Win10 SDK
