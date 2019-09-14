@@ -15,7 +15,7 @@ jobs:
     ##
     # Example running a script using Windows cmd:
     steps:
-      - uses: actions/checkout@actions
+      - uses: actions/checkout@master
       - name: install Qt
         run: |
             echo --- Qt install cmd script ---
