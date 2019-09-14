@@ -19,10 +19,14 @@ jobs:
         run: |
             echo --- Qt install cmd goes here ---
             echo %cd%
+            echo type %cd%\\.github\\workflows\\qt-installer-windows.qs
+            type %cd%\\.github\\workflows\\qt-installer-windows.qs
+            echo dir /s/b qt-installer-windows.qs
+            dir /s/b qt-installer-windows.qs
             echo curl -vLo qt-unified-windows-x86-online.exe http://download.qt.io/official_releases/online_installers/qt-unified-windows-x86-online.exe
             curl -vLo qt-unified-windows-x86-online.exe http://download.qt.io/official_releases/online_installers/qt-unified-windows-x86-online.exe
-            echo qt-unified-windows-x86-online.exe --verbose --script .github/workflows/qt-installer-windows.qs
-            qt-unified-windows-x86-online.exe --verbose --script .github/workflows/qt-installer-windows.qs
+            echo qt-unified-windows-x86-online.exe --verbose --script %cd%\\.github\\workflows\\qt-installer-windows.qs
+            qt-unified-windows-x86-online.exe --verbose --script %cd%\\.github\\workflows\\qt-installer-windows.qs
             
       - name: install Win10 SDK
         run: |
