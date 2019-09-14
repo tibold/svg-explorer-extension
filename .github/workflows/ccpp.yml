@@ -17,16 +17,20 @@ jobs:
     steps:
       - name: install Qt
         run: |
-            echo --- Qt install cmd goes here ---
+            echo --- Qt install cmd script ---
+            echo %~dpnx0
             echo %cd%
-            echo cmd: dir /s/b qt-installer-windows.qs
-            dir /s/b qt-installer-windows.qs
-            echo cmd: type %cd%\\tools\qt-installer-windows.qs
-            type %cd%\\tools\qt-installer-windows.qs
+            dir
+            echo cmd: pushd tools
+            pushd tools
+            echo cmd: dir /s/b *.qs
+            dir /s/b *.qs
+            echo cmd: type qt-installer-windows.qs
+            type qt-installer-windows.qs
             echo cmd: curl -vLo qt-unified-windows-x86-online.exe http://download.qt.io/official_releases/online_installers/qt-unified-windows-x86-online.exe
             curl -vLo qt-unified-windows-x86-online.exe http://download.qt.io/official_releases/online_installers/qt-unified-windows-x86-online.exe
-            echo cmd: qt-unified-windows-x86-online.exe --verbose --script %cd%\\tools\qt-installer-windows.qs
-            qt-unified-windows-x86-online.exe --verbose --script %cd%\\tools\qt-installer-windows.qs
+            echo cmd: qt-unified-windows-x86-online.exe --verbose --script qt-installer-windows.qs
+            qt-unified-windows-x86-online.exe --verbose --script qt-installer-windows.qs
             
       - name: install Win10 SDK
         run: |
