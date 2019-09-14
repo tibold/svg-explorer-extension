@@ -15,10 +15,12 @@ jobs:
     ##
     # Example running a script using Windows cmd:
     steps:
+      - uses: actions/checkout@actions
       - name: install Qt
         run: |
             echo --- Qt install cmd script ---
             echo %~dpnx0
+            pushd %GITHUB_WORKSPACE%
             echo %cd%
             dir
             echo cmd: pushd tools
