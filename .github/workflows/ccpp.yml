@@ -19,13 +19,11 @@ jobs:
       - name: install Qt
         run: |
             @echo on
+            @prompt $G$S
             @echo --- Qt install cmd script %~dpnx0
             pushd %GITHUB_WORKSPACE%
-            @echo %cd%
             pushd tools
-            rem @echo cmd: curl -vLo qt-unified-windows-x86-online.exe http://download.qt.io/official_releases/online_installers/qt-unified-windows-x86-online.exe
             curl -vLo qt-unified-windows-x86-online.exe http://download.qt.io/official_releases/online_installers/qt-unified-windows-x86-online.exe
-            rem @echo cmd: qt-unified-windows-x86-online.exe --verbose --script qt-installer-windows.qs
             qt-unified-windows-x86-online.exe --verbose --script qt-installer-windows.qs
             
       - name: install Win10 SDK
