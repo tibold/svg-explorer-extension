@@ -26,18 +26,18 @@ jobs:
             curl -vLo qt-unified-windows-x86-online.exe http://download.qt.io/official_releases/online_installers/qt-unified-windows-x86-online.exe
             qt-unified-windows-x86-online.exe --verbose --script qt-installer-windows.qs
             
-      - name: install Win10 SDK
-        run: |
-            rem choco install windows-sdk-10
-                :: fails with exit code 2008, see https://chocolatey.org/packages/windows-sdk-10.1#comment-4196624327
-            pushd "%temp%"
-            echo pwd: %cd%
-            echo cmd: curl -o winsdksetup.exe https://download.microsoft.com/download/9/3/9/939441D4-6FBA-48EE-9EF7-402C1AA8B8A7/windowssdk/winsdksetup.exe
-            curl -o winsdksetup.exe https://download.microsoft.com/download/9/3/9/939441D4-6FBA-48EE-9EF7-402C1AA8B8A7/windowssdk/winsdksetup.exe
-            echo cmd: winsdksetup.exe /Quiet /NoRestart /Log windows-sdk-install.log
-            winsdksetup.exe /Quiet /NoRestart /Log windows-sdk-install.log
-            echo cmd: type windows-sdk-install.log
-            type windows-sdk-install.log
+      #- name: install Win10 SDK
+      #  run: |
+      #      rem choco install windows-sdk-10
+      #          :: fails with exit code 2008, see https://chocolatey.org/packages/windows-sdk-10.1#comment-4196624327
+      #      pushd "%temp%"
+      #      echo pwd: %cd%
+      #      echo cmd: curl -o winsdksetup.exe https://download.microsoft.com/download/9/3/9/939441D4-6FBA-48EE-9EF7-402C1AA8B8A7/windowssdk/winsdksetup.exe
+      #      curl -o winsdksetup.exe https://download.microsoft.com/download/9/3/9/939441D4-6FBA-48EE-9EF7-402C1AA8B8A7/windowssdk/winsdksetup.exe
+      #      echo cmd: winsdksetup.exe /Quiet /NoRestart /Log windows-sdk-install.log
+      #      winsdksetup.exe /Quiet /NoRestart /Log windows-sdk-install.log
+      #      echo cmd: type windows-sdk-install.log
+      #      type windows-sdk-install.log
             
       - name: install MS build tools
         run: choco install visualstudio2019buildtools visualstudio2019-workload-vctools
