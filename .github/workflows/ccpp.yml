@@ -18,7 +18,7 @@ jobs:
       - uses: actions/checkout@master
       # https://github.com/miurahr/aqtinstall
       - name: install aqt
-        run: pip install aqt
+        run: pip install aqtinstall
       - name: install Qt  
         run: aqt install -O c:\Qt 5.11.3 windows desktop win64_msvc2017_64
             
