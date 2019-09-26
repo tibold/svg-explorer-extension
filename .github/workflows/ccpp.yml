@@ -16,15 +16,11 @@ jobs:
     # Example running a script using Windows cmd:
     steps:
       - uses: actions/checkout@master
-      - name: install Qt
-        run: |
-            @echo on
-            @prompt $G$S
-            @echo --- Qt install cmd script %~dpnx0
-            pushd %GITHUB_WORKSPACE%
-            pushd tools
-            curl -vLo qt-unified-windows-x86-online.exe http://download.qt.io/official_releases/online_installers/qt-unified-windows-x86-online.exe
-            qt-unified-windows-x86-online.exe --verbose --script qt-installer-windows.qs
+      # https://github.com/miurahr/aqtinstall
+      - name: install aqt
+        run: pip install aqt
+      - name: install Qt  
+        run: aqt install -O c:\Qt 5.11.3 windows desktop win64_msvc2017_64
             
       #- name: install Win10 SDK
       #  run: |
