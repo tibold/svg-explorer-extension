@@ -3,7 +3,9 @@
 Extension module for Windows Explorer to render SVG thumbnails, so that you can have an overview of your SVG files.
 
 ## Installation
-From _[Releases](https://github.com/maphew/svg-explorer-extension/releases)_ download and run appropriate binary for your system, then kill `explorer.exe` and icon cache
+From _[Releases](https://github.com/maphew/svg-explorer-extension/releases)_ download and run appropriate binary for your system. Note: you probably need an _unsigned_ version as the signed binary certificate was revoked (#29) around Dec 2019.
+
+Then kill `explorer.exe` and icon cache
 ([ref](https://superuser.com/questions/342052/how-to-get-svg-thumbnails-in-windows-explorer)):
    
     TASKKILL /IM explorer* /F
