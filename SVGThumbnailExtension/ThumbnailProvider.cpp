@@ -103,12 +103,14 @@ STDMETHODIMP CThumbnailProvider::GetThumbnail(UINT cx,
         height = cx;
     }
 
+#ifndef NDEBUG
     QFile * f = new QFile("C:\\dev\\svg.log");
     f->open(QFile::Append);
 //    f->write(QString("Size: %1 \n.").arg(cx).toAscii());
     f->write(QString("Size: %1 \n.").arg(cx).toUtf8());
     f->flush();
     f->close();
+#endif
 
     QImage * device = new QImage(width, height, QImage::Format_ARGB32);
     device->fill(Qt::transparent);
@@ -146,7 +148,7 @@ STDMETHODIMP CThumbnailProvider::GetThumbnail(UINT cx,
     // Old code:
     //*phbmp = QPixmap::fromImage(*device).toWinHBITMAP(QPixmap::Alpha);
     // new test code:
-    *phbmp = QtWin::toHBITMAP(QPixmap::fromImage(*device));
+    *phbmp = QtWin::toHBITMAP(QPixmap::fromImage(*device), QtWin::HBitmapAlpha);
     assert(*phbmp != NULL);
 
     delete painter;
