@@ -146,7 +146,7 @@ STDMETHODIMP CThumbnailProvider::GetThumbnail(UINT cx,
     // Old code:
     //*phbmp = QPixmap::fromImage(*device).toWinHBITMAP(QPixmap::Alpha);
     // new test code:
-    *phbmp = QtWin::toHBITMAP(QPixmap::fromImage(*device));
+    *phbmp = QtWin::toHBITMAP(QPixmap::fromImage(*device), QtWin::HBitmapAlpha);
     assert(*phbmp != NULL);
 
     delete painter;
