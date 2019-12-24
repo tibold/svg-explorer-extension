@@ -25,11 +25,11 @@ Name: "en"; MessagesFile: "compiler:Default.isl"; LicenseFile: "../LICENSE.md"
 
 [Files]
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
-Source: "x64\release\Qt5Core.dll"; DestDir: "{app}";
-Source: "x64\release\Qt5Gui.dll"; DestDir: "{app}";
-Source: "x64\release\Qt5Svg.dll"; DestDir: "{app}";
-Source: "x64\release\Qt5Widgets.dll"; DestDir: "{app}";
-Source: "x64\release\Qt5WinExtras.dll"; DestDir: "{app}";
+Source: "{#QTDIR}\Qt5Core.dll"; DestDir: "{app}";
+Source: "{#QTDIR}\Qt5Gui.dll"; DestDir: "{app}";
+Source: "{#QTDIR}\Qt5Svg.dll"; DestDir: "{app}";
+Source: "{#QTDIR}\Qt5Widgets.dll"; DestDir: "{app}";
+Source: "{#QTDIR}\Qt5WinExtras.dll"; DestDir: "{app}";
 Source: "..\SVGThumbnailExtension-build-x64_Release\release\SVGThumbnailExtension.dll"; DestDir: "{app}"; Flags: regserver
 ; Licenses
 ; FIXME: the qt license should not be stored in this repository but be copied from the qt distribution
