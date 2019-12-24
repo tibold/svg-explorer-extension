@@ -21,22 +21,22 @@ ChangesAssociations=yes
 ArchitecturesInstallIn64BitMode=x64
 
 [Languages]
-Name: "en"; MessagesFile: "compiler:Default.isl"; LicenseFile: "license.txt"
+Name: "en"; MessagesFile: "compiler:Default.isl"; LicenseFile: "../LICENSE.md"
 
 [Files]
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 Source: "qt.conf"; DestDir: "{app}";
-Source: "x64\release\Qt5Core.dll"; DestDir: "{app}";
-Source: "x64\release\Qt5Gui.dll"; DestDir: "{app}";
-Source: "x64\release\Qt5Svg.dll"; DestDir: "{app}";
-Source: "x64\release\Qt5Widgets.dll"; DestDir: "{app}";
-Source: "x64\release\Qt5WinExtras.dll"; DestDir: "{app}";
-Source: "x64\release\plugins\platforms\qwindows.dll"; DestDir: "{app}\plugins\platforms\";
-Source: "x64\release\plugins\styles\qwindowsvistastyle.dll"; DestDir: "{app}\plugins\styles\";
-Source: "..\SVGThumbnailExtension-build-x64_Release\release\SVGThumbnailExtension.dll"; DestDir: "{app}"; Flags: regserver
+Source: "{#QTDIR}\Qt5Core.dll"; DestDir: "{app}";
+Source: "{#QTDIR}\Qt5Gui.dll"; DestDir: "{app}";
+Source: "{#QTDIR}\Qt5Svg.dll"; DestDir: "{app}";
+Source: "{#QTDIR}\Qt5Widgets.dll"; DestDir: "{app}";
+Source: "{#QTDIR}\Qt5WinExtras.dll"; DestDir: "{app}";
+;Source: "..\SVGThumbnailExtension-build-x64_Release\release\SVGThumbnailExtension.dll"; DestDir: "{app}"; Flags: regserver
+Source: "..\build-SVGThumbnailExtension-Desktop_Qt_5_12_3_MSVC2017_64bit-Debug\debug\SVGThumbnailExtension.dll"; DestDir: "{app}"; Flags: regserver
 ; Licenses
 ; FIXME: the qt license should not be stored in this repository but be copied from the qt distribution
-Source: "license\Qt.txt"; DestDir: "{app}\license\";
+; mhw, 2019-12-24: disabled Qt license ref. until I figure out where to get it from
+;Source: "license\Qt.txt"; DestDir: "{app}\license\";
 Source: "../LICENSE.md"; DestDir: "{app}\license\";
 
 [Code]
