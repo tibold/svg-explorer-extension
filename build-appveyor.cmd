@@ -1,6 +1,6 @@
-@REM
-@REM Copy this script to https://ci.appveyor.com/project/maphew/svg-explorer-extension/settings/build
-@REM
+REM
+REM Copy this script to https://ci.appveyor.com/project/maphew/svg-explorer-extension/settings/build
+REM
 set VC_DIR=C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build
 set INNOSETUP_DIR=C:\Program Files (x86)\Inno Setup 5
 set JOM=C:\Qt\Tools\QtCreator\bin\jom.exe
