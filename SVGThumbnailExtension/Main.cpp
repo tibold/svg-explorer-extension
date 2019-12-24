@@ -1,5 +1,7 @@
 #define INITGUID
 #include "Common.h"
+#include <QtCore/QFileInfo>
+#include <QtCore/private/qcoreapplication_p.h>
 
 
 HINSTANCE g_hinstDll = NULL;
@@ -36,6 +38,17 @@ BOOL APIENTRY DllMain(HINSTANCE hinstDll,
    {
    case DLL_PROCESS_ATTACH:
       g_hinstDll = hinstDll;
+
+      // qt.conf file won't be found, because the applicationFilePath is set to
+      // the calling process name, which is "C:\Windows\System32\regsvr32.exe"
+      // and not the absolute path to the dll, fix it by setting the
+      // applicationFilePath manually with the private method
+      // (I don't like this approach but it works for now)
+      TCHAR buffer[MAX_PATH];
+      GetModuleFileName(hinstDll, buffer, MAX_PATH);
+      QCoreApplicationPrivate::setApplicationFilePath(
+          QFileInfo(QString::fromWCharArray(buffer)).filePath());
+
       int c = 0;
       app = new QApplication(c, (char **)0, 0);
       break;

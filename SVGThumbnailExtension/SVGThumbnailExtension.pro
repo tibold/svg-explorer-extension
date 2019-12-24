@@ -6,6 +6,7 @@
 
 QT       += svg
 QT       += winextras
+QT       += core-private
 
 TARGET = SVGThumbnailExtension
 TEMPLATE = lib
