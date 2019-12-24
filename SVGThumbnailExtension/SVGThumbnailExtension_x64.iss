@@ -30,7 +30,8 @@ Source: "{#QTDIR}\Qt5Gui.dll"; DestDir: "{app}";
 Source: "{#QTDIR}\Qt5Svg.dll"; DestDir: "{app}";
 Source: "{#QTDIR}\Qt5Widgets.dll"; DestDir: "{app}";
 Source: "{#QTDIR}\Qt5WinExtras.dll"; DestDir: "{app}";
-Source: "..\SVGThumbnailExtension-build-x64_Release\release\SVGThumbnailExtension.dll"; DestDir: "{app}"; Flags: regserver
+;Source: "..\SVGThumbnailExtension-build-x64_Release\release\SVGThumbnailExtension.dll"; DestDir: "{app}"; Flags: regserver
+Source: "..\build-SVGThumbnailExtension-Desktop_Qt_5_12_3_MSVC2017_64bit-Debug\debug\SVGThumbnailExtension.dll"; DestDir: "{app}"; Flags: regserver
 ; Licenses
 ; FIXME: the qt license should not be stored in this repository but be copied from the qt distribution
 Source: "license\Qt.txt"; DestDir: "{app}\license\";
