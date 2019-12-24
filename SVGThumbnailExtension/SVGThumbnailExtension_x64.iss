@@ -21,7 +21,7 @@ ChangesAssociations=yes
 ArchitecturesInstallIn64BitMode=x64
 
 [Languages]
-Name: "en"; MessagesFile: "compiler:Default.isl"; LicenseFile: "license.txt"
+Name: "en"; MessagesFile: "compiler:Default.isl"; LicenseFile: "../LICENSE.md"
 
 [Files]
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
