@@ -1,6 +1,6 @@
 #pragma once
 
-#include <QSvgRenderer>
+#include <QtSvg/QSvgRenderer>
 
 class CThumbnailProvider : public IThumbnailProvider, IObjectWithSite, IInitializeWithStream
 {

@@ -4,10 +4,12 @@
 #include <QtGui/QImage>
 #include <QtGui/QPixmap>
 #include <QtGui/QPainter>
+#if QT_VERSION >= 0x050200
 #include <QtWin>
+#endif
 #include <QtCore/QFile>
-#include <QString>
-#include <QDateTime>
+#include <QtCore/QString>
+#include <QtCore/QDateTime>
 #include "assert.h"
 
 using namespace Gdiplus;
@@ -141,14 +143,15 @@ STDMETHODIMP CThumbnailProvider::GetThumbnail(UINT cx,
 #ifndef NDEBUG
     device->save(QString("C:\\dev\\%1.png").arg(QDateTime::currentMSecsSinceEpoch()), "PNG");
 #endif
-    // Issue #19, https://github.com/maphew/svg-explorer-extension/issues/19
-    // Old syntax: HBITMAP QPixmap::toWinHBITMAP(HBitmapFormat format = NoAlpha) const
-    // New syntax: HBITMAP QtWin::toHBITMAP(const QPixmap &p, QtWin::HBitmapFormat format = HBitmapNoAlpha)
-    //
-    // Old code:
-    //*phbmp = QPixmap::fromImage(*device).toWinHBITMAP(QPixmap::Alpha);
-    // new test code:
+
+// Issue #19, https://github.com/maphew/svg-explorer-extension/issues/19
+// Old syntax: HBITMAP QPixmap::toWinHBITMAP(HBitmapFormat format = NoAlpha) const
+// New syntax: HBITMAP QtWin::toHBITMAP(const QPixmap &p, QtWin::HBitmapFormat format = HBitmapNoAlpha)
+#if QT_VERSION < 0x050200
+    *phbmp = QPixmap::fromImage(*device).toWinHBITMAP(QPixmap::Alpha);
+#else
     *phbmp = QtWin::toHBITMAP(QPixmap::fromImage(*device), QtWin::HBitmapAlpha);
+#endif
     assert(*phbmp != NULL);
 
     delete painter;
