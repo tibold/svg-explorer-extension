@@ -14,8 +14,7 @@ CONFIG(release, debug|release):DEFINES += NDEBUG
 
 win32:LIBS += \
     shlwapi.lib \
-    advapi32.lib \
-    gdiplus.lib
+    advapi32.lib
 
 DEFINES += SVGTHUMBNAILEXTENSION_LIBRARY
 
