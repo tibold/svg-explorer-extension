@@ -15,6 +15,7 @@ Then kill `explorer.exe` and icon cache
 You can just simply use the provided binary installers. Make sure you download the right architecture (the 32 bit installer will run on a 64 bit system, but the extension will not function).
 
 ## svg-explorer-extension - developer note
+[![Build status Appveyor](https://ci.appveyor.com/api/projects/status/github/maphew/svg-explorer-extension?svg=true)](https://ci.appveyor.com/project/maphew/svg-explorer-extension)  
 This repo was imported from https://svgextension.codeplex.com/
 
 I imported the svg-explorer-extension from CodePlex posted here to GitHub because I use the extension and I didn't want to lose access to it when CodePlex shut down in 2017. 
