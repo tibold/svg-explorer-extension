@@ -1,18 +1,22 @@
 #include "Common.h"
 #include "ThumbnailProvider.h"
-#include "gdiplus.h"
+
+#include <gdiplus.h>
+#include <assert.h>
+
+#include <QtCore/QDateTime>
+#include <QtCore/QDir>
+#include <QtCore/QFile>
+#include <QtCore/QString>
 #include <QtGui/QImage>
-#include <QtGui/QPixmap>
 #include <QtGui/QPainter>
+#include <QtGui/QPixmap>
 #if QT_VERSION >= 0x050200
 #include <QtWin>
 #endif
-#include <QtCore/QFile>
-#include <QtCore/QString>
-#include <QtCore/QDateTime>
-#include "assert.h"
 
 using namespace Gdiplus;
+
 CThumbnailProvider::CThumbnailProvider()
 {
     DllAddRef();
@@ -29,6 +33,28 @@ CThumbnailProvider::~CThumbnailProvider()
         m_pSite = NULL;
     }
     DllRelease();
+}
+
+/*
+ * ===============
+ * IUnkown methods
+ * ===============
+ */
+HRESULT CThumbnailProvider::QueryInterfaceFactory(REFIID riid, void** ppvObject)
+{
+    *ppvObject = NULL;
+
+    CThumbnailProvider * provider = new CThumbnailProvider();
+    if (provider == nullptr)
+    {
+        return E_OUTOFMEMORY;
+    }
+
+    auto result = provider->QueryInterface(riid, ppvObject);
+
+    provider->Release();
+
+    return result;
 }
 
 STDMETHODIMP CThumbnailProvider::QueryInterface(REFIID riid,
@@ -58,6 +84,18 @@ STDMETHODIMP_(ULONG) CThumbnailProvider::Release()
     return (ULONG)cRef;
 }
 
+/*
+ * ===============
+ * End IUnkown methods
+ * ===============
+ */
+
+/*
+ * ============================
+ * IInitializeWithSteam methods
+ * ============================
+ */
+
 STDMETHODIMP CThumbnailProvider::Initialize(IStream *pstm, 
                                             DWORD grfMode)
 {
@@ -68,6 +106,7 @@ STDMETHODIMP CThumbnailProvider::Initialize(IStream *pstm,
     if(pstm->Stat(&stat, STATFLAG_DEFAULT) != S_OK){
         return S_FALSE;
     }
+
 
     char * data = new char[stat.cbSize.QuadPart];
 
@@ -82,6 +121,18 @@ STDMETHODIMP CThumbnailProvider::Initialize(IStream *pstm,
     return S_OK;
 }
 
+/*
+ * ============================
+ * End IInitializeWithSteam methods
+ * ============================
+ */
+
+/*
+ * ============================
+ * IThumbnailProvider methods
+ * ============================
+ */
+
 STDMETHODIMP CThumbnailProvider::GetThumbnail(UINT cx, 
                                               HBITMAP *phbmp,
                                               WTS_ALPHATYPE *pdwAlpha)
@@ -89,53 +140,46 @@ STDMETHODIMP CThumbnailProvider::GetThumbnail(UINT cx,
     *phbmp = NULL;
     *pdwAlpha = WTSAT_ARGB;
 
-    int width, height;
+    // Fit the render into a (cx * cx) sqaure while maintaining the aspect ratio.
     QSize size = renderer.defaultSize();
-
-    if(size.width() == size.height()){
-        width = cx;
-        height = cx;
-    } else if (size.width() > size.height()){
-        width = cx;
-        height = size.height() * ((double)cx / (double)size.width());
-    } else {
-        width = size.width() * ((double)cx / (double)size.height());
-        height = cx;
-    }
+    size.scale(cx, cx, Qt::AspectRatioMode::KeepAspectRatio);
 
 #ifndef NDEBUG
-    QFile * f = new QFile("C:\\dev\\svg.log");
-    f->open(QFile::Append);
-    //    f->write(QString("Size: %1 \n.").arg(cx).toAscii());
-    f->write(QString("Size: %1 \n.").arg(cx).toUtf8());
-    f->flush();
-    f->close();
+    QDir debugDir("C:\\dev");
+    if(debugDir.exists()) {
+        QFile f("C:\\dev\\svg.log");
+        f.open(QFile::Append);
+        //    f->write(QString("Size: %1 \n.").arg(cx).toAscii());
+        f.write(QString("Size: %1 \n").arg(cx).toUtf8());
+        f.flush();
+        f.close();
+    }
 #endif
 
-    QImage * device = new QImage(width, height, QImage::Format_ARGB32);
+    QImage * device = new QImage(size, QImage::Format_ARGB32);
     device->fill(Qt::transparent);
-    QPainter * painter = new QPainter();
-    QFont font;
-    QColor color_font = QColor(255, 0, 0);
+    QPainter painter(device);
 
-    painter->begin(device);
-    painter->setRenderHints(QPainter::Antialiasing |
-                            QPainter::SmoothPixmapTransform |
-                            QPainter::TextAntialiasing);
-    assert(device->paintingActive() && painter->isActive());
+    painter.setRenderHints(QPainter::Antialiasing |
+                           QPainter::SmoothPixmapTransform |
+                           QPainter::TextAntialiasing);
+
+    assert(device->paintingActive() && painter.isActive());
     if(loaded){
-        renderer.render(painter);
+        renderer.render(&painter);
     } else {
+        QFont font;
+        QColor color_font = QColor(255, 0, 0);
         int font_size = cx / 10;
 
         font.setStyleHint(QFont::Monospace);
         font.setPixelSize(font_size);
 
-        painter->setPen(color_font);
-        painter->setFont(font);
-        painter->drawText(font_size, (cx - font_size) / 2, "Invalid SVG file.");
+        painter.setPen(color_font);
+        painter.setFont(font);
+        painter.drawText(font_size, (cx - font_size) / 2, "Invalid SVG file.");
     }
-    painter->end();
+    painter.end();
 
     assert(!device->isNull());
 #ifndef NDEBUG
@@ -146,19 +190,30 @@ STDMETHODIMP CThumbnailProvider::GetThumbnail(UINT cx,
     // Old syntax: HBITMAP QPixmap::toWinHBITMAP(HBitmapFormat format = NoAlpha) const
     // New syntax: HBITMAP QtWin::toHBITMAP(const QPixmap &p, QtWin::HBitmapFormat format = HBitmapNoAlpha)
 #if QT_VERSION < 0x050200
-    *phbmp = QPixmap::fromImage(*device).toWinHBITMAP(QPixmap::Alpha);
+    *phbmp = QPixmap::fromImage(device).toWinHBITMAP(QPixmap::Alpha);
 #else
     *phbmp = QtWin::toHBITMAP(QPixmap::fromImage(*device), QtWin::HBitmapAlpha);
 #endif
     assert(*phbmp != NULL);
 
-    delete painter;
     delete device;
 
     if( *phbmp != NULL )
         return NOERROR;
     return E_NOTIMPL;
 }
+
+/*
+ * ============================
+ * End IThumbnailProvider methods
+ * ============================
+ */
+
+/*
+ * ============================
+ * IObjectWithSite methods
+ * ============================
+ */
 
 STDMETHODIMP CThumbnailProvider::GetSite(REFIID riid, 
                                          void** ppvSite)
@@ -186,17 +241,8 @@ STDMETHODIMP CThumbnailProvider::SetSite(IUnknown* pUnkSite)
     return S_OK;
 }
 
-STDAPI CThumbnailProvider_CreateInstance(REFIID riid, void** ppvObject)
-{
-    *ppvObject = NULL;
-
-    CThumbnailProvider* ptp = new CThumbnailProvider();
-    if (!ptp)
-    {
-        return E_OUTOFMEMORY;
-    }
-
-    HRESULT hr = ptp->QueryInterface(riid, ppvObject);
-    ptp->Release();
-    return hr;
-}
+/*
+ * ============================
+ * End IObjectWithSite methods
+ * ============================
+ */

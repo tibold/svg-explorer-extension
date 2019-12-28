@@ -1,6 +1,7 @@
 #pragma once
 
-#include <QtSvg/QSvgRenderer>
+#include "Common.h"
+
 
 class CThumbnailProvider : public IThumbnailProvider, IObjectWithSite, IInitializeWithStream
 {
@@ -14,6 +15,9 @@ private:
 
 public:
     CThumbnailProvider();
+
+    // Helper
+    static HRESULT QueryInterfaceFactory(REFIID, void**);
 
     //  IUnknown methods
     STDMETHOD(QueryInterface)(REFIID, void**);

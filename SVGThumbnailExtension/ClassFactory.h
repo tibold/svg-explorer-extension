@@ -10,6 +10,9 @@ private:
 public:
     CClassFactory();
 
+    // Helper
+    static HRESULT QueryInterfaceFactory(REFIID, void**);
+
     //  IUnknown methods
     STDMETHOD(QueryInterface)(REFIID, void**);
     STDMETHOD_(ULONG, AddRef)();

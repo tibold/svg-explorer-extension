@@ -1,8 +1,6 @@
-#define INITGUID
 #include "Common.h"
 #include "ClassFactory.h"
-
-STDAPI CThumbnailProvider_CreateInstance(REFIID riid, void** ppvObject);
+#include "ThumbnailProvider.h"
 
 CClassFactory::CClassFactory()
 {
@@ -13,6 +11,21 @@ CClassFactory::CClassFactory()
 CClassFactory::~CClassFactory()
 {
     DllRelease();
+}
+
+HRESULT CClassFactory::QueryInterfaceFactory(REFIID riid,
+                                             void** ppvObject)
+{
+    CClassFactory * factory = new CClassFactory();
+    if (factory == nullptr) {
+        return E_OUTOFMEMORY;
+    }
+
+    auto result = factory->QueryInterface(riid, ppvObject);
+
+    factory->Release();
+
+    return result;
 }
 
 STDMETHODIMP CClassFactory::QueryInterface(REFIID riid,
@@ -47,7 +60,7 @@ STDMETHODIMP CClassFactory::CreateInstance(IUnknown* punkOuter,
     if (NULL != punkOuter)
         return CLASS_E_NOAGGREGATION;
 
-    return CThumbnailProvider_CreateInstance(riid, ppvObject);
+    return CThumbnailProvider::QueryInterfaceFactory(riid, ppvObject);
 }
 
 STDMETHODIMP CClassFactory::LockServer(BOOL fLock)
@@ -66,14 +79,6 @@ STDAPI DllGetClassObject(REFCLSID rclsid,
     if (!IsEqualCLSID(CLSID_SampleThumbnailProvider, rclsid))
         return CLASS_E_CLASSNOTAVAILABLE;
 
-    CClassFactory *pcf;
-    HRESULT hr;
-
-    pcf = new CClassFactory();
-    if (NULL == pcf)
-        return E_OUTOFMEMORY;
-
-    hr = pcf->QueryInterface(riid, ppv);
-    pcf->Release();
+    auto hr = CClassFactory::QueryInterfaceFactory(riid, ppv);
     return hr;
 }

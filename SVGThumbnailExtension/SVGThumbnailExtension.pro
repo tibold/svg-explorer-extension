@@ -19,11 +19,13 @@ win32:LIBS += \
 DEFINES += SVGTHUMBNAILEXTENSION_LIBRARY
 
 SOURCES += \
+    Registry.cpp \
     ThumbnailProvider.cpp \
     Main.cpp \
     ClassFactory.cpp
 
 HEADERS +=\
+    Registry.h \
     ThumbnailProvider.h \
     ClassFactory.h \
     Common.h
