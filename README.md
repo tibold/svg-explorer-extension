@@ -3,7 +3,7 @@
 Extension module for Windows Explorer to render SVG thumbnails, so that you can have an overview of your SVG files.
 
 ## Installation
-From _[Releases](https://github.com/maphew/svg-explorer-extension/releases)_ download and run appropriate binary for your system. Note: you probably need an _unsigned_ version as the signed binary certificate was revoked (#29) around Dec 2019.
+From _[Releases](https://github.com/tibold/svg-explorer-extension/releases)_ download and run appropriate binary for your system. Note: you probably need an _unsigned_ version as the signed binary certificate was revoked (#29) around Dec 2019.
 
 Then kill `explorer.exe` and icon cache
 ([ref](https://superuser.com/questions/342052/how-to-get-svg-thumbnails-in-windows-explorer)):
@@ -21,17 +21,7 @@ https://ci.appveyor.com/project/maphew/svg-explorer-extension/build/artifacts
 
 Being dev releases, they might not work. Current status: [![Build status Appveyor](https://ci.appveyor.com/api/projects/status/github/maphew/svg-explorer-extension?svg=true)](https://ci.appveyor.com/project/maphew/svg-explorer-extension)  
 
-
-## svg-explorer-extension - developer note
-This repo was imported from https://svgextension.codeplex.com/
-
-I imported the svg-explorer-extension from CodePlex posted here to GitHub because I use the extension and I didn't want to lose access to it when CodePlex shut down in 2017. 
-
-I'm primarily a python guy and am ill equipped to maintaining this project. So if you know C++ and have some time to spare, please feel free to take over! In the meantime I'm happy to merge pull requests for those who care to offer drive-by fixin's but can't vet them for quality or completeness. ;-)
-
---Matt
-
-## Build Environment c.2019
+## Developer Build Environment c.2019
 Warning: it's many GB. 
 
 - QtCreator -  `choco install qtcreator`
@@ -44,6 +34,15 @@ Warning: it's many GB.
 Installation is with [Chocolatey](https://chocolatey.org/) wherever I have a choice. The list may be incomplete. I've installed and uninstalled several different programs and versions of programs trying to find the right combination.
 
 More info: https://github.com/maphew/svg-explorer-extension/issues/18
+
+## History
+Tibold Kandrai started the project around 2013, where it was hosted on Codeplex. Life happened and Tibold didn't have time to work on it any more, though the extension continued to work more than it didn't so people kept using it. 
+
+In 2017 Codeplex shut down and turned into a read-only warehouse. Matt Wilkie imported the project to GitHub and continued to maintain the project as best as a python-not-c++ guy could. The extension continued to work more than not, though the problems started to add up as Windows continued to evolve and change underfoot.
+
+In late 2019 a lucky confluence of stubborn brute force learning on Matt's part and newly active and knowledgeable contributors (Daniel, Simon, Voodoo) revived the feared soon-to-be-comatose project. Bugs were fixed and automatic binary builds came into being. Life rebounded. Right on the heels of this, Tibold regained attention time for side-projects and again assumed the project owner mantle.
+
+2020? Hasn't happened yet, but it's reasonable to expect growth and unfolding. :-)
 
 
 ## Thanks to
