@@ -4,24 +4,21 @@
 
 STDAPI CThumbnailProvider_CreateInstance(REFIID riid, void** ppvObject);
 
-
 CClassFactory::CClassFactory()
 {
     m_cRef = 1;
     DllAddRef();
 }
 
-
 CClassFactory::~CClassFactory()
 {
     DllRelease();
 }
 
-
 STDMETHODIMP CClassFactory::QueryInterface(REFIID riid,
                                            void** ppvObject)
 {
-    static const QITAB qit[] = 
+    static const QITAB qit[] =
     {
         QITABENT(CClassFactory, IClassFactory),
         {0},
@@ -29,13 +26,11 @@ STDMETHODIMP CClassFactory::QueryInterface(REFIID riid,
     return QISearch(this, qit, riid, ppvObject);
 }
 
-
 STDMETHODIMP_(ULONG) CClassFactory::AddRef()
 {
     LONG cRef = InterlockedIncrement(&m_cRef);
     return (ULONG)cRef;
 }
-
 
 STDMETHODIMP_(ULONG) CClassFactory::Release()
 {
@@ -44,7 +39,6 @@ STDMETHODIMP_(ULONG) CClassFactory::Release()
         delete this;
     return (ULONG)cRef;
 }
-
 
 STDMETHODIMP CClassFactory::CreateInstance(IUnknown* punkOuter,
                                            REFIID riid,
@@ -56,13 +50,11 @@ STDMETHODIMP CClassFactory::CreateInstance(IUnknown* punkOuter,
     return CThumbnailProvider_CreateInstance(riid, ppvObject);
 }
 
-
 STDMETHODIMP CClassFactory::LockServer(BOOL fLock)
 {
     Q_UNUSED(fLock);
     return E_NOTIMPL;
 }
-
 
 STDAPI DllGetClassObject(REFCLSID rclsid,
                          REFIID riid,

@@ -21,7 +21,6 @@ CThumbnailProvider::CThumbnailProvider()
     loaded = false;
 }
 
-
 CThumbnailProvider::~CThumbnailProvider()
 {
     if (m_pSite)
@@ -32,11 +31,10 @@ CThumbnailProvider::~CThumbnailProvider()
     DllRelease();
 }
 
-
 STDMETHODIMP CThumbnailProvider::QueryInterface(REFIID riid,
                                                 void** ppvObject)
 {
-    static const QITAB qit[] = 
+    static const QITAB qit[] =
     {
         QITABENT(CThumbnailProvider, IInitializeWithStream),
         QITABENT(CThumbnailProvider, IThumbnailProvider),
@@ -46,13 +44,11 @@ STDMETHODIMP CThumbnailProvider::QueryInterface(REFIID riid,
     return QISearch(this, qit, riid, ppvObject);
 }
 
-
 STDMETHODIMP_(ULONG) CThumbnailProvider::AddRef()
 {
     LONG cRef = InterlockedIncrement(&m_cRef);
     return (ULONG)cRef;
 }
-
 
 STDMETHODIMP_(ULONG) CThumbnailProvider::Release()
 {
@@ -86,12 +82,11 @@ STDMETHODIMP CThumbnailProvider::Initialize(IStream *pstm,
     return S_OK;
 }
 
-
 STDMETHODIMP CThumbnailProvider::GetThumbnail(UINT cx, 
-                                              HBITMAP *phbmp, 
+                                              HBITMAP *phbmp,
                                               WTS_ALPHATYPE *pdwAlpha)
 {
-	*phbmp = NULL; 
+    *phbmp = NULL;
     *pdwAlpha = WTSAT_ARGB;
 
     int width, height;
@@ -111,7 +106,7 @@ STDMETHODIMP CThumbnailProvider::GetThumbnail(UINT cx,
 #ifndef NDEBUG
     QFile * f = new QFile("C:\\dev\\svg.log");
     f->open(QFile::Append);
-//    f->write(QString("Size: %1 \n.").arg(cx).toAscii());
+    //    f->write(QString("Size: %1 \n.").arg(cx).toAscii());
     f->write(QString("Size: %1 \n.").arg(cx).toUtf8());
     f->flush();
     f->close();
@@ -147,9 +142,9 @@ STDMETHODIMP CThumbnailProvider::GetThumbnail(UINT cx,
     device->save(QString("C:\\dev\\%1.png").arg(QDateTime::currentMSecsSinceEpoch()), "PNG");
 #endif
 
-// Issue #19, https://github.com/maphew/svg-explorer-extension/issues/19
-// Old syntax: HBITMAP QPixmap::toWinHBITMAP(HBitmapFormat format = NoAlpha) const
-// New syntax: HBITMAP QtWin::toHBITMAP(const QPixmap &p, QtWin::HBitmapFormat format = HBitmapNoAlpha)
+    // Issue #19, https://github.com/maphew/svg-explorer-extension/issues/19
+    // Old syntax: HBITMAP QPixmap::toWinHBITMAP(HBitmapFormat format = NoAlpha) const
+    // New syntax: HBITMAP QtWin::toHBITMAP(const QPixmap &p, QtWin::HBitmapFormat format = HBitmapNoAlpha)
 #if QT_VERSION < 0x050200
     *phbmp = QPixmap::fromImage(*device).toWinHBITMAP(QPixmap::Alpha);
 #else
@@ -160,12 +155,10 @@ STDMETHODIMP CThumbnailProvider::GetThumbnail(UINT cx,
     delete painter;
     delete device;
 
-	if( *phbmp != NULL )
-		return NOERROR;
-	return E_NOTIMPL;
-
+    if( *phbmp != NULL )
+        return NOERROR;
+    return E_NOTIMPL;
 }
-
 
 STDMETHODIMP CThumbnailProvider::GetSite(REFIID riid, 
                                          void** ppvSite)
@@ -176,7 +169,6 @@ STDMETHODIMP CThumbnailProvider::GetSite(REFIID riid,
     }
     return E_NOINTERFACE;
 }
-
 
 STDMETHODIMP CThumbnailProvider::SetSite(IUnknown* pUnkSite)
 {
@@ -193,7 +185,6 @@ STDMETHODIMP CThumbnailProvider::SetSite(IUnknown* pUnkSite)
     }
     return S_OK;
 }
-
 
 STDAPI CThumbnailProvider_CreateInstance(REFIID riid, void** ppvObject)
 {

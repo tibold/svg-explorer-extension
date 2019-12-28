@@ -1,17 +1,14 @@
 #define INITGUID
 #include "Common.h"
 
-
 HINSTANCE g_hinstDll = NULL;
 LONG g_cRef = 0;
-
 
 typedef struct _REGKEY_DELETEKEY
 {
     HKEY hKey;
     LPCWSTR lpszSubKey;
 } REGKEY_DELETEKEY;
-
 
 typedef struct _REGKEY_SUBKEY_AND_VALUE
 {
@@ -20,7 +17,6 @@ typedef struct _REGKEY_SUBKEY_AND_VALUE
     LPCWSTR lpszValue;
     DWORD dwType;
     DWORD_PTR dwData;
-;
 } REGKEY_SUBKEY_AND_VALUE;
 
 STDAPI CreateRegistryKeys(REGKEY_SUBKEY_AND_VALUE* aKeys, ULONG cKeys);
@@ -29,43 +25,43 @@ STDAPI DeleteRegistryKeys(REGKEY_DELETEKEY* aKeys, ULONG cKeys);
 QApplication * app;
 
 BOOL APIENTRY DllMain(HINSTANCE hinstDll,
-                      DWORD dwReason, 
+                      DWORD dwReason,
                       LPVOID pvReserved)
 {
-   Q_UNUSED(pvReserved)
-   switch (dwReason)
-   {
-   case DLL_PROCESS_ATTACH:
-      g_hinstDll = hinstDll;
-      int c = 0;
-      app = new QApplication(c, (char **)0, 0);
-      break;
-   }
-   return TRUE;
+    Q_UNUSED(pvReserved)
+    switch (dwReason)
+    {
+    case DLL_PROCESS_ATTACH:
+        g_hinstDll = hinstDll;
+        int c = 0;
+        app = new QApplication(c, (char **)0, 0);
+        break;
+    }
+    return TRUE;
 }
 
 STDAPI_(HINSTANCE) DllInstance()
 {
-   return g_hinstDll;
+    return g_hinstDll;
 }
 
 STDAPI DllCanUnloadNow()
 {
-   return g_cRef ? S_FALSE : S_OK;
+    return g_cRef ? S_FALSE : S_OK;
 }
 
 STDAPI_(ULONG) DllAddRef()
 {
-   LONG cRef = InterlockedIncrement(&g_cRef);
-   return cRef;
+    LONG cRef = InterlockedIncrement(&g_cRef);
+    return cRef;
 }
 
 STDAPI_(ULONG) DllRelease()
 {
-   LONG cRef = InterlockedDecrement(&g_cRef);
-   if (0 > cRef)
-      cRef = 0;
-   return cRef;
+    LONG cRef = InterlockedDecrement(&g_cRef);
+    if (0 > cRef)
+        cRef = 0;
+    return cRef;
 }
 
 STDAPI DllRegisterServer()
@@ -75,14 +71,14 @@ STDAPI DllRegisterServer()
     ZeroMemory(szModule, sizeof(szModule));
     GetModuleFileName(g_hinstDll, szModule, ARRAYSIZE(szModule));
 
-	//uncomment the following
+    //uncomment the following
     REGKEY_SUBKEY_AND_VALUE keys[] = {
-                                        {HKEY_CLASSES_ROOT, L"CLSID\\" szCLSID_SampleThumbnailProvider, NULL, REG_SZ, (DWORD_PTR)L"Sample Thumbnail Provider"},
-                                        {HKEY_CLASSES_ROOT, L"CLSID\\" szCLSID_SampleThumbnailProvider L"\\InprocServer32", NULL, REG_SZ, (DWORD_PTR)szModule},
-                                        {HKEY_CLASSES_ROOT, L"CLSID\\" szCLSID_SampleThumbnailProvider L"\\InprocServer32", L"ThreadingModel", REG_SZ, (DWORD_PTR)L"Apartment"},
-                                        {HKEY_CLASSES_ROOT, L".SVG\\shellex\\{E357FCCD-A995-4576-B01F-234630154E96}", NULL, REG_SZ, (DWORD_PTR)szCLSID_SampleThumbnailProvider},
-                                        {HKEY_CLASSES_ROOT, L".SVGZ\\shellex\\{E357FCCD-A995-4576-B01F-234630154E96}", NULL, REG_SZ, (DWORD_PTR)szCLSID_SampleThumbnailProvider}
-                                     };
+        {HKEY_CLASSES_ROOT, L"CLSID\\" szCLSID_SampleThumbnailProvider, NULL, REG_SZ, (DWORD_PTR)L"Sample Thumbnail Provider"},
+        {HKEY_CLASSES_ROOT, L"CLSID\\" szCLSID_SampleThumbnailProvider L"\\InprocServer32", NULL, REG_SZ, (DWORD_PTR)szModule},
+        {HKEY_CLASSES_ROOT, L"CLSID\\" szCLSID_SampleThumbnailProvider L"\\InprocServer32", L"ThreadingModel", REG_SZ, (DWORD_PTR)L"Apartment"},
+        {HKEY_CLASSES_ROOT, L".SVG\\shellex\\{E357FCCD-A995-4576-B01F-234630154E96}", NULL, REG_SZ, (DWORD_PTR)szCLSID_SampleThumbnailProvider},
+        {HKEY_CLASSES_ROOT, L".SVGZ\\shellex\\{E357FCCD-A995-4576-B01F-234630154E96}", NULL, REG_SZ, (DWORD_PTR)szCLSID_SampleThumbnailProvider}
+    };
     return CreateRegistryKeys(keys, ARRAYSIZE(keys));
 }
 
@@ -91,7 +87,6 @@ STDAPI DllUnregisterServer()
     REGKEY_DELETEKEY keys[] = {{HKEY_CLASSES_ROOT, L"CLSID\\" szCLSID_SampleThumbnailProvider}};
     return DeleteRegistryKeys(keys, ARRAYSIZE(keys));
 }
-
 
 STDAPI CreateRegistryKey(REGKEY_SUBKEY_AND_VALUE* pKey)
 {
@@ -132,8 +127,6 @@ STDAPI CreateRegistryKey(REGKEY_SUBKEY_AND_VALUE* pKey)
     return hr;
 }
 
-
-
 STDAPI CreateRegistryKeys(REGKEY_SUBKEY_AND_VALUE* aKeys, ULONG cKeys)
 {
     HRESULT hr = S_OK;
@@ -148,7 +141,6 @@ STDAPI CreateRegistryKeys(REGKEY_SUBKEY_AND_VALUE* aKeys, ULONG cKeys)
     }
     return hr;
 }
-
 
 STDAPI DeleteRegistryKeys(REGKEY_DELETEKEY* aKeys, ULONG cKeys)
 {
