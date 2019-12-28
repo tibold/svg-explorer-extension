@@ -32,6 +32,7 @@ BOOL APIENTRY DllMain(HINSTANCE hinstDll,
                       DWORD dwReason, 
                       LPVOID pvReserved)
 {
+   Q_UNUSED(pvReserved)
    switch (dwReason)
    {
    case DLL_PROCESS_ATTACH:

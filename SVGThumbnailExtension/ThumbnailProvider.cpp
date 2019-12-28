@@ -18,6 +18,7 @@ CThumbnailProvider::CThumbnailProvider()
     DllAddRef();
     m_cRef = 1;
     m_pSite = NULL;
+    loaded = false;
 }
 
 
@@ -66,6 +67,8 @@ STDMETHODIMP CThumbnailProvider::Initialize(IStream *pstm,
 {
     ULONG len;
     STATSTG stat;
+    Q_UNUSED(grfMode)
+
     if(pstm->Stat(&stat, STATFLAG_DEFAULT) != S_OK){
         return S_FALSE;
     }

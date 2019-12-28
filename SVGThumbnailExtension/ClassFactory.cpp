@@ -59,6 +59,7 @@ STDMETHODIMP CClassFactory::CreateInstance(IUnknown* punkOuter,
 
 STDMETHODIMP CClassFactory::LockServer(BOOL fLock)
 {
+    Q_UNUSED(fLock);
     return E_NOTIMPL;
 }
 
