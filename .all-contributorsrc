@@ -31,11 +31,24 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "tibold",
+      "name": "Tibold Kandrai",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/1974659?v=4",
+      "profile": "https://github.com/tibold",
+      "contributions": [
+        "test",
+        "ideas",
+        "code",
+        "maintenance",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 3,
   "projectName": "svg-explorer-extension",
-  "projectOwner": "maphew",
+  "projectOwner": "tibold",
   "repoType": "github",
   "repoHost": "https://github.com",
   "skipCi": true
