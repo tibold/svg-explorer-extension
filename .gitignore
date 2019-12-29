@@ -1,6 +1,5 @@
-build-*
+.vs
 *.pro.user
 *.pro.user.*
-build
-debug
-.vs
+build-*
+var
