@@ -44,6 +44,15 @@
         "maintenance",
         "doc"
       ]
+    },
+    {
+      "login": "maphew",
+      "name": "matt wilkie",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/486200?v=4",
+      "profile": "http://www.maphew.com",
+      "contributions": [
+        "maintenance"
+      ]
     }
   ],
   "contributorsPerLine": 3,
