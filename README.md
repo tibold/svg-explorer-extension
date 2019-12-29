@@ -36,7 +36,7 @@ Installation is with [Chocolatey](https://chocolatey.org/) wherever I have a cho
 More info: https://github.com/maphew/svg-explorer-extension/issues/18
 
 ## History
-Tibold Kandrai started the project around 2013, where it was hosted on Codeplex. Life happened and Tibold didn't have time to work on it any more, though the extension continued to work more than it didn't so people kept using it. 
+Tibold Kandrai started the project in 2012, first on Google Code, Codeplex. Life happened and Tibold didn't have time to work on it any more, though the extension continued to work more than it didn't so people kept using it. 
 
 In 2017 Codeplex shut down and turned into a read-only warehouse. Matt Wilkie imported the project to GitHub and continued to maintain the project as best as a python-not-c++ guy could. The extension continued to work more than not, though the problems started to add up as Windows continued to evolve and change underfoot.
 
@@ -44,15 +44,13 @@ In late 2019 a lucky confluence of stubborn brute force learning on Matt's part 
 
 2020? Hasn't happened yet, but it's reasonable to expect growth and unfolding. :-)
 
-
-## Thanks to
-
- * [Qt](https://www.qt.io/)
- * [Jeremy@urk](https://www.codemonkeycodes.com/2010/01/11/ithumbnailprovider-re-visited/)
-
 ## Contributors ✨
 
 Thank you's for helping make this a better project _([emoji key](https://allcontributors.org/docs/en/emoji-key))_:
+
+* [Qt](https://www.qt.io/) - dev platform and libraries
+* [Jeremy@urk](https://www.codemonkeycodes.com/2010/01/11/ithumbnailprovider-re-visited/) - initial example
+* [Tibold Kandrai](https://github.com/tibold) - Project creator and primary developer
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
