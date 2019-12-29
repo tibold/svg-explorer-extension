@@ -1,10 +1,29 @@
 #define INITGUID
 #include "Registry.h"
 
+#include <QDebug>
+#include <QDir>
+#include <QFileInfo>
+
 HINSTANCE g_hinstDll = NULL;
 LONG g_cRef = 0;
 
 QApplication * app;
+
+void Initialize(HMODULE module) {
+    int c = 0;
+    WCHAR path[2048];
+    memset(path, 0, 2048);
+    GetModuleFileNameW(module, path, 2048);
+    auto modulePath = QString::fromWCharArray(path, 2048);
+    QFileInfo dll(modulePath);
+    QDir libraryPath = dll.dir();
+    QStringList libraryPaths = (QStringList() << libraryPath.absolutePath());
+    qDebug() << libraryPaths;
+    QApplication::setLibraryPaths(libraryPaths);
+    app = new QApplication(c, (char **)0, 0);
+}
+
 
 BOOL APIENTRY DllMain(HINSTANCE hinstDll,
                       DWORD dwReason,
@@ -15,13 +34,11 @@ BOOL APIENTRY DllMain(HINSTANCE hinstDll,
     {
     case DLL_PROCESS_ATTACH:
         g_hinstDll = hinstDll;
-        int c = 0;
-        app = new QApplication(c, (char **)0, 0);
+        Initialize(hinstDll);
         break;
     }
     return TRUE;
 }
-
 STDAPI_(HINSTANCE) DllInstance()
 {
     return g_hinstDll;
