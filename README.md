@@ -65,6 +65,7 @@ Thank you's for helping make this a better project _([emoji key](https://allcont
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/tibold"><img src="https://avatars2.githubusercontent.com/u/1974659?v=4" width="32px;" alt=""/><br /><sub><b>Tibold Kandrai</b></sub></a><br /><a href="https://github.com/tibold/svg-explorer-extension/commits?author=tibold" title="Tests">⚠️</a> <a href="#ideas-tibold" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/tibold/svg-explorer-extension/commits?author=tibold" title="Code">💻</a> <a href="#maintenance-tibold" title="Maintenance">🚧</a> <a href="https://github.com/tibold/svg-explorer-extension/commits?author=tibold" title="Documentation">📖</a></td>
+    <td align="center"><a href="http://www.maphew.com"><img src="https://avatars3.githubusercontent.com/u/486200?v=4" width="32px;" alt=""/><br /><sub><b>Matt Wilkie</b></sub></a><br /><a href="#maintenance-maphew" title="Maintenance">🚧</a></td>
   </tr>
 </table>
 
