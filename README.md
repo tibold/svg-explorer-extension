@@ -30,6 +30,7 @@ Warning: it's many GB.
   - `choco install visualstudio2017buildtools` 
   - `choco install visualstudio2017-workload-vctools`
 - Windows SDK - `choco install windows-sdk-10.-0`
+- Inno Setup v6 - `choco install innosetup`
 
 Installation is with [Chocolatey](https://chocolatey.org/) wherever I have a choice. The list may be incomplete. I've installed and uninstalled several different programs and versions of programs trying to find the right combination.
 
