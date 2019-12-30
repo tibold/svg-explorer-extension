@@ -12,6 +12,20 @@ Param(
     [string] $Architecture = 'x64',
 
     [Parameter()]
+    [ValidateSet('2015', '2017', '2019')]
+    [string] $VSVersion = '2017',
+
+    [Parameter()]
+    [ValidateSet('Community', 'Professional', 'Enterprise', 'BuildTools')]
+    [string] $VSEdition = 'Community',
+    
+    [Parameter()]
+    [string] $WinSdk = '10.0.17763.0',
+    
+    [Parameter()]
+    [string] $QtVersion = '5.12.*',
+    
+    [Parameter()]
     [string] $QtInstallPath = 'C:\Qt\'
 )
 
@@ -35,17 +49,17 @@ $vsArchitectureMap = @{
 }
 
 Use-VisualStudioBuildTools `
-    -Version '2017' `
-    -Edition 'Community' `
+    -Version $VSVersion `
+    -Edition $VSEdition `
     -Architecture $vsArchitectureMap[$Architecture] `
-    -Sdk '10.0.17763.0' `
+    -Sdk $WinSdk `
     -Spectre `
     -Verbose
 
 # NOTE: I know it's not right. We'll fix it later.
 $qtArchitectureMap = @{
-    'x86' = 'msvc2017';
-    'x64' = 'msvc2017_64';
+    'x86' = "msvc$VSVersion";
+    'x64' = "msvc${VSVersion}_64";
 }
 
 $qtParams = @{ }
@@ -54,7 +68,7 @@ if ($QtInstallPath) {
 }
 
 Use-QtBuildTools `
-    -Version '5.12.*' `
+    -Version $QtVersion `
     -Platform $qtArchitectureMap[$Architecture] `
     @qtParams `
     -Verbose
