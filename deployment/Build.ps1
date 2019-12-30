@@ -39,7 +39,8 @@ Use-VisualStudioBuildTools `
     -Edition 'Community' `
     -Architecture $vsArchitectureMap[$Architecture] `
     -Sdk '10.0.17763.0' `
-    -Spectre
+    -Spectre `
+    -Verbose
 
 # NOTE: I know it's not right. We'll fix it later.
 $qtArchitectureMap = @{
@@ -55,7 +56,8 @@ if ($QtInstallPath) {
 Use-QtBuildTools `
     -Version '5.12.*' `
     -Platform $qtArchitectureMap[$Architecture] `
-    @qtParams
+    @qtParams `
+    -Verbose
 
 Use-InnoSetup
 
