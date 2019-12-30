@@ -59,9 +59,12 @@ Thank you's for helping make this a better project _([emoji key](https://allcont
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="http://telcontar.net/"><img src="https://avatars3.githubusercontent.com/u/5874930?v=4" width="32px;" alt=""/><br /><sub><b>Daniel Beardsmore</b></sub></a><br /><a href="https://github.com/maphew/svg-explorer-extension/commits?author=Daniel-Beardsmore" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/GitMensch"><img src="https://avatars3.githubusercontent.com/u/6699539?v=4" width="32px;" alt=""/><br /><sub><b>Simon Sobisch</b></sub></a><br /><a href="https://github.com/maphew/svg-explorer-extension/commits?author=GitMensch" title="Documentation">📖</a></td>
-    <td align="center"><a href="https://github.com/voodoo66"><img src="https://avatars1.githubusercontent.com/u/14852960?s=400&v=4" width="32px;" alt=""/><br /><sub><b></b></sub></a><br /><a href="https://github.com/maphew/svg-explorer-extension/commits?author=voodoo66" title="Code">💻</a></td>
+    <td align="center"><a href="http://telcontar.net/"><img src="https://avatars3.githubusercontent.com/u/5874930?v=4" width="32px;" alt=""/><br /><sub><b>Daniel Beardsmore</b></sub></a><br /><a href="https://github.com/tibold/svg-explorer-extension/commits?author=Daniel-Beardsmore" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/GitMensch"><img src="https://avatars3.githubusercontent.com/u/6699539?v=4" width="32px;" alt=""/><br /><sub><b>Simon Sobisch</b></sub></a><br /><a href="https://github.com/tibold/svg-explorer-extension/commits?author=GitMensch" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/voodoo66"><img src="https://avatars1.githubusercontent.com/u/14852960?s=400&v=4" width="32px;" alt=""/><br /><sub><b></b></sub></a><br /><a href="https://github.com/tibold/svg-explorer-extension/commits?author=voodoo66" title="Code">💻</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/tibold"><img src="https://avatars2.githubusercontent.com/u/1974659?v=4" width="32px;" alt=""/><br /><sub><b>Tibold Kandrai</b></sub></a><br /><a href="https://github.com/tibold/svg-explorer-extension/commits?author=tibold" title="Tests">⚠️</a> <a href="#ideas-tibold" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/tibold/svg-explorer-extension/commits?author=tibold" title="Code">💻</a> <a href="#maintenance-tibold" title="Maintenance">🚧</a> <a href="https://github.com/tibold/svg-explorer-extension/commits?author=tibold" title="Documentation">📖</a></td>
   </tr>
 </table>
 
