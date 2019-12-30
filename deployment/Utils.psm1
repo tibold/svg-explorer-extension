@@ -29,7 +29,7 @@ function Use-VisualStudioBuildTools{
         [string] $Version = '2019',
 
         [Parameter()]
-        [ValidateSet('Community', 'Professional', 'Enterprise', $null)]
+        [ValidateSet('Community', 'Professional', 'Enterprise', 'BuildTools')]
         [string] $Edition = 'Community',
 
         [Parameter()]
@@ -49,13 +49,6 @@ function Use-VisualStudioBuildTools{
     }
 
     $environmentSetupBatchFile = "C:\Program Files (x86)\Microsoft Visual Studio\$Version\$Edition\VC\Auxiliary\Build\vcvarsall.bat"
-    $environmentSetupBatchFileFallback = "C:\Program Files (x86)\Microsoft Visual Studio\$Version\BuildTools\VC\Auxiliary\Build\vcvarsall.bat"
-
-    if(-not ($Edition -and (Test-Path $environmentSetupBatchFile))){
-        # TODO: Try to detect the installed VS edition instead of relying just on a fallback.
-        $environmentSetupBatchFile = $environmentSetupBatchFileFallback
-    }
-
     if(-not (Test-Path $environmentSetupBatchFile)) {
         throw "Requested Visual Studio version $Version or edition $Edition is not installed"
     }
