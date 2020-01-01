@@ -1,0 +1,5 @@
+.vs
+*.pro.user
+*.pro.user.*
+build-*
+var

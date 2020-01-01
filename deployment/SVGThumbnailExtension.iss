@@ -1,40 +1,46 @@
+#ifndef arch
+; Default to x64 if nothing was defined.
+#define arch 'x64'
+#endif
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{4CA20D9A-98AC-4DD6-9C16-7449F29AC08A}
-AppMutex=dotz_softwares__svg_explorer_extension
+AppMutex=github_tibold_svg_explorer_extension
 AppName="SVG Explorer Extension"
-AppVersion="0.1.1"
-AppVerName="SVG Explorer Extension 0.1.1"
-AppPublisher="Dotz Softwares"
-AppPublisherURL=http://www.dotzdev.com/
-AppSupportURL=http://www.dotzdev.com/
-AppUpdatesURL=http://www.dotzdev.com/
-DefaultDirName="{pf}\Dotz Softwares\SVG Explorer Extension"
+AppVersion="1.0.0"
+AppVerName="SVG Explorer Extension 1.0.0"
+AppPublisher="Tibold Kandrai"
+AppPublisherURL=https://tibold.kandrai.rocks/
+AppSupportURL=https://github.com/tibold/svg-explorer-extension/issues
+AppUpdatesURL=https://github.com/tibold/svg-explorer-extension/releases
+DefaultDirName="{commonpf64}\SVG Explorer Extension"
 DefaultGroupName="SVG Explorer Extension"
-OutputDir=..\installer
-OutputBaseFilename="dssee_setup_x64"
+OutputDir=..\var\installer
+OutputBaseFilename="svg_explorer_extension_{#arch}"
 Compression=lzma
 SolidCompression=yes
 ChangesAssociations=yes
+#if arch == "x64"
 ArchitecturesInstallIn64BitMode=x64
+#endif
 
 [Languages]
-Name: "en"; MessagesFile: "compiler:Default.isl"; LicenseFile: "../LICENSE.md"
+Name: "en"; MessagesFile: "compiler:Default.isl"; LicenseFile: "..\LICENSE.md"
 
 [Files]
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
-Source: "x64\release\Qt5Core.dll"; DestDir: "{app}";
-Source: "x64\release\Qt5Gui.dll"; DestDir: "{app}";
-Source: "x64\release\Qt5Svg.dll"; DestDir: "{app}";
-Source: "x64\release\Qt5Widgets.dll"; DestDir: "{app}";
-Source: "x64\release\Qt5WinExtras.dll"; DestDir: "{app}";
-Source: "..\SVGThumbnailExtension-build-x64_Release\release\SVGThumbnailExtension.dll"; DestDir: "{app}"; Flags: regserver
+Source: "..\var\dist\{#arch}\release\*"; DestDir: "{app}"; Flags: recursesubdirs                   
+Source: "..\var\dist\{#arch}\release\SVGThumbnailExtension.dll"; DestDir: "{app}"; Flags: regserver           
+Source: "..\var\dist\{#arch}\release\vc_redist.{#arch}.exe"; DestDir: "{tmp}"; Flags: deleteafterinstall
 ; Licenses
 ; FIXME: the qt license should not be stored in this repository but be copied from the qt distribution
-Source: "license\Qt.txt"; DestDir: "{app}\license\";
-Source: "../LICENSE.md"; DestDir: "{app}\license\";
+Source: "..\var\licenses\Qt.txt"; DestDir: "{app}\license\";
+Source: "..\LICENSE.md"; DestDir: "{app}\license\";
+
+[Run]
+Filename: "{tmp}\vc_redist.{#arch}.exe"; Parameters: "/install /passive"; StatusMsg: "Installing VC++ 2017 runtime"
 
 [Code]
 

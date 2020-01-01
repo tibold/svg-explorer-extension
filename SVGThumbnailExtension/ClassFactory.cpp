@@ -1,9 +1,6 @@
-#define INITGUID
 #include "Common.h"
 #include "ClassFactory.h"
-
-STDAPI CThumbnailProvider_CreateInstance(REFIID riid, void** ppvObject);
-
+#include "ThumbnailProvider.h"
 
 CClassFactory::CClassFactory()
 {
@@ -11,17 +8,30 @@ CClassFactory::CClassFactory()
     DllAddRef();
 }
 
-
 CClassFactory::~CClassFactory()
 {
     DllRelease();
 }
 
+HRESULT CClassFactory::QueryInterfaceFactory(REFIID riid,
+                                             void** ppvObject)
+{
+    CClassFactory * factory = new CClassFactory();
+    if (factory == nullptr) {
+        return E_OUTOFMEMORY;
+    }
+
+    auto result = factory->QueryInterface(riid, ppvObject);
+
+    factory->Release();
+
+    return result;
+}
 
 STDMETHODIMP CClassFactory::QueryInterface(REFIID riid,
                                            void** ppvObject)
 {
-    static const QITAB qit[] = 
+    static const QITAB qit[] =
     {
         QITABENT(CClassFactory, IClassFactory),
         {0},
@@ -29,13 +39,11 @@ STDMETHODIMP CClassFactory::QueryInterface(REFIID riid,
     return QISearch(this, qit, riid, ppvObject);
 }
 
-
 STDMETHODIMP_(ULONG) CClassFactory::AddRef()
 {
     LONG cRef = InterlockedIncrement(&m_cRef);
     return (ULONG)cRef;
 }
-
 
 STDMETHODIMP_(ULONG) CClassFactory::Release()
 {
@@ -45,7 +53,6 @@ STDMETHODIMP_(ULONG) CClassFactory::Release()
     return (ULONG)cRef;
 }
 
-
 STDMETHODIMP CClassFactory::CreateInstance(IUnknown* punkOuter,
                                            REFIID riid,
                                            void** ppvObject)
@@ -53,15 +60,14 @@ STDMETHODIMP CClassFactory::CreateInstance(IUnknown* punkOuter,
     if (NULL != punkOuter)
         return CLASS_E_NOAGGREGATION;
 
-    return CThumbnailProvider_CreateInstance(riid, ppvObject);
+    return CThumbnailProvider::QueryInterfaceFactory(riid, ppvObject);
 }
-
 
 STDMETHODIMP CClassFactory::LockServer(BOOL fLock)
 {
+    Q_UNUSED(fLock);
     return E_NOTIMPL;
 }
-
 
 STDAPI DllGetClassObject(REFCLSID rclsid,
                          REFIID riid,
@@ -73,14 +79,6 @@ STDAPI DllGetClassObject(REFCLSID rclsid,
     if (!IsEqualCLSID(CLSID_SampleThumbnailProvider, rclsid))
         return CLASS_E_CLASSNOTAVAILABLE;
 
-    CClassFactory *pcf;
-    HRESULT hr;
-
-    pcf = new CClassFactory();
-    if (NULL == pcf)
-        return E_OUTOFMEMORY;
-
-    hr = pcf->QueryInterface(riid, ppv);
-    pcf->Release();
+    auto hr = CClassFactory::QueryInterfaceFactory(riid, ppv);
     return hr;
 }

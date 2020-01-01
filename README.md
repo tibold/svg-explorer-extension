@@ -30,29 +30,28 @@ Warning: it's many GB.
   - `choco install visualstudio2017buildtools` 
   - `choco install visualstudio2017-workload-vctools`
 - Windows SDK - `choco install windows-sdk-10.-0`
+- Inno Setup v6 - `choco install innosetup`
 
 Installation is with [Chocolatey](https://chocolatey.org/) wherever I have a choice. The list may be incomplete. I've installed and uninstalled several different programs and versions of programs trying to find the right combination.
 
 More info: https://github.com/maphew/svg-explorer-extension/issues/18
 
 ## History
-Tibold Kandrai started the project around 2013, where it was hosted on Codeplex. Life happened and Tibold didn't have time to work on it any more, though the extension continued to work more than it didn't so people kept using it. 
+Tibold Kandrai started the project in 2012, first on Google Code, Codeplex. Life happened and Tibold didn't have time to work on it any more, though the extension continued to work more than it didn't so people kept using it. 
 
 In 2017 Codeplex shut down and turned into a read-only warehouse. Matt Wilkie imported the project to GitHub and continued to maintain the project as best as a python-not-c++ guy could. The extension continued to work more than not, though the problems started to add up as Windows continued to evolve and change underfoot.
 
 In late 2019 a lucky confluence of stubborn brute force learning on Matt's part and newly active and knowledgeable contributors (Daniel, Simon, Voodoo) revived the feared soon-to-be-comatose project. Bugs were fixed and automatic binary builds came into being. Life rebounded. Right on the heels of this, Tibold regained attention time for side-projects and again assumed the project owner mantle.
 
-2020? Hasn't happened yet, but it's reasonable to expect growth and unfolding. :-)
-
-
-## Thanks to
-
- * [Qt](https://www.qt.io/)
- * [Jeremy@urk](https://www.codemonkeycodes.com/2010/01/11/ithumbnailprovider-re-visited/)
+On 1st of January, 2020 version v1.0.0 was released including all bug fixes and up to date dependencies. Let's see where the rest of the year takes us. :-)
 
 ## Contributors ✨
 
 Thank you's for helping make this a better project _([emoji key](https://allcontributors.org/docs/en/emoji-key))_:
+
+* [Qt](https://www.qt.io/) - dev platform and libraries
+* [Jeremy@urk](https://www.codemonkeycodes.com/2010/01/11/ithumbnailprovider-re-visited/) - initial example
+* [Tibold Kandrai](https://github.com/tibold) - Project creator and primary developer
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -73,5 +72,5 @@ Thank you's for helping make this a better project _([emoji key](https://allcont
 <!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)  
+[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors)  
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of all kinds welcome (code, docs, user support, ...).
