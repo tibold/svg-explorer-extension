@@ -9,8 +9,8 @@
 AppId={{4CA20D9A-98AC-4DD6-9C16-7449F29AC08A}
 AppMutex=github_tibold_svg_explorer_extension
 AppName="SVG Explorer Extension"
-AppVersion="0.2.0"
-AppVerName="SVG Explorer Extension 0.2.0"
+AppVersion="1.0.0"
+AppVerName="SVG Explorer Extension 1.0.0"
 AppPublisher="Tibold Kandrai"
 AppPublisherURL=https://tibold.kandrai.rocks/
 AppSupportURL=https://github.com/tibold/svg-explorer-extension/issues
