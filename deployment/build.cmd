@@ -1,1 +1,1 @@
-pwsh.exe -Command .\deployment\Build.ps1 -VSEdition BuildTools -Verbose
+pwsh.exe -Command .\Build.ps1 -VSEdition BuildTools -Verbose
