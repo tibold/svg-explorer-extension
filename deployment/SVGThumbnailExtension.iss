@@ -24,6 +24,8 @@ SolidCompression=yes
 ChangesAssociations=yes
 #if arch == "x64"
 ArchitecturesInstallIn64BitMode=x64
+#else
+ArchitecturesInstallIn64BitMode=x86
 #endif
 
 [Languages]
@@ -40,7 +42,7 @@ Source: "..\var\licenses\Qt.txt"; DestDir: "{app}\license\";
 Source: "..\LICENSE.md"; DestDir: "{app}\license\";
 
 [Run]
-Filename: "{tmp}\vc_redist.{#arch}.exe"; Parameters: "/install /passive"; StatusMsg: "Installing VC++ 2017 runtime"
+Filename: "{tmp}\vc_redist.{#arch}.exe"; Parameters: "/install /passive /norestart"; StatusMsg: "Installing VC++ 2017 runtime"
 
 [Code]
 
