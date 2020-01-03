@@ -5,9 +5,11 @@
 #include <assert.h>
 
 #include <QtCore/QDateTime>
+#ifndef NDEBUG
+#include <QtCore/QString>
 #include <QtCore/QDir>
 #include <QtCore/QFile>
-#include <QtCore/QString>
+#endif
 #include <QtGui/QImage>
 #include <QtGui/QPainter>
 #include <QtGui/QPixmap>
@@ -190,7 +192,7 @@ STDMETHODIMP CThumbnailProvider::GetThumbnail(UINT cx,
     // Old syntax: HBITMAP QPixmap::toWinHBITMAP(HBitmapFormat format = NoAlpha) const
     // New syntax: HBITMAP QtWin::toHBITMAP(const QPixmap &p, QtWin::HBitmapFormat format = HBitmapNoAlpha)
 #if QT_VERSION < 0x050200
-    *phbmp = QPixmap::fromImage(device).toWinHBITMAP(QPixmap::Alpha);
+    *phbmp = QPixmap::fromImage(*device).toWinHBITMAP(QPixmap::Alpha);
 #else
     *phbmp = QtWin::toHBITMAP(QPixmap::fromImage(*device), QtWin::HBitmapAlpha);
 #endif
