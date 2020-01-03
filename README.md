@@ -34,7 +34,7 @@ Warning: it's many GB.
 
 Installation is with [Chocolatey](https://chocolatey.org/) wherever I have a choice. The list may be incomplete. I've installed and uninstalled several different programs and versions of programs trying to find the right combination.
 
-More info: https://github.com/maphew/svg-explorer-extension/issues/18
+More info: https://github.com/tibold/svg-explorer-extension/issues/18
 
 ## History
 Tibold Kandrai started the project in 2012, first on Google Code, Codeplex. Life happened and Tibold didn't have time to work on it any more, though the extension continued to work more than it didn't so people kept using it. 

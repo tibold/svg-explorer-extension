@@ -140,7 +140,7 @@ STDMETHODIMP CThumbnailProvider::GetThumbnail(UINT cx,
     *phbmp = NULL;
     *pdwAlpha = WTSAT_ARGB;
 
-    // Fit the render into a (cx * cx) sqaure while maintaining the aspect ratio.
+    // Fit the render into a (cx * cx) square while maintaining the aspect ratio.
     QSize size = renderer.defaultSize();
     size.scale(cx, cx, Qt::AspectRatioMode::KeepAspectRatio);
 
@@ -186,7 +186,7 @@ STDMETHODIMP CThumbnailProvider::GetThumbnail(UINT cx,
     device->save(QString("C:\\dev\\%1.png").arg(QDateTime::currentMSecsSinceEpoch()), "PNG");
 #endif
 
-    // Issue #19, https://github.com/maphew/svg-explorer-extension/issues/19
+    // Issue #19, https://github.com/tibold/svg-explorer-extension/issues/19
     // Old syntax: HBITMAP QPixmap::toWinHBITMAP(HBitmapFormat format = NoAlpha) const
     // New syntax: HBITMAP QtWin::toHBITMAP(const QPixmap &p, QtWin::HBitmapFormat format = HBitmapNoAlpha)
 #if QT_VERSION < 0x050200
