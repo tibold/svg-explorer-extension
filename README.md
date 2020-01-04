@@ -22,6 +22,7 @@ https://ci.appveyor.com/project/tibold/svg-explorer-extension/build/artifacts
 Being dev releases, they might not work. Current status: 
 
 [![Build status Appveyor](https://ci.appveyor.com/api/projects/status/u7ybqw5640a5kdid?svg=true)](https://ci.appveyor.com/project/tibold/svg-explorer-extension)
+[![Coverity Scan Build Status](https://scan.coverity.com/projects/20107/badge.svg)](https://scan.coverity.com/projects/svg-viewer-extension-for-windows-explorer)
 
 ## Developer Build Environment c.2019
 Warning: it's about 10 GB. 
