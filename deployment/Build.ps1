@@ -26,7 +26,10 @@ Param(
     [string] $QtVersion = '5.12.*',
     
     [Parameter()]
-    [string] $QtInstallPath = 'C:\Qt\'
+    [string] $QtInstallPath = 'C:\Qt\',
+    
+    [Parameter()]
+    [string] $InnoSetupPath = 'C:\Program Files (x86)\Inno Setup 6'
 )
 
 $ErrorActionPreference = 'stop'
@@ -73,7 +76,7 @@ Use-QtBuildTools `
     @qtParams `
     -Verbose
 
-Use-InnoSetup
+Use-InnoSetup -InstallPath $InnoSetupPath
 
 Write-Verbose "Building application."
 
