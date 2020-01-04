@@ -1,9 +1,10 @@
 #define INITGUID
 #include "Registry.h"
 
-#include <QDebug>
-#include <QDir>
-#include <QFileInfo>
+#include <QtCore/QString>
+#include <QtCore/QDebug>
+#include <QtCore/QDir>
+#include <QtCore/QFileInfo>
 
 HINSTANCE g_hinstDll = NULL;
 LONG g_cRef = 0;
