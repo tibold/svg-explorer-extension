@@ -15,17 +15,31 @@ AppPublisher="Tibold Kandrai"
 AppPublisherURL=https://tibold.kandrai.rocks/
 AppSupportURL=https://github.com/tibold/svg-explorer-extension/issues
 AppUpdatesURL=https://github.com/tibold/svg-explorer-extension/releases
-DefaultDirName="{commonpf64}\SVG Explorer Extension"
 DefaultGroupName="SVG Explorer Extension"
 OutputDir=..\var\installer
 OutputBaseFilename="svg_explorer_extension_{#arch}"
 Compression=lzma
 SolidCompression=yes
 ChangesAssociations=yes
+; This is to support both IS 5 and 6
+#if arch == 'x64'
+#ifdef commonpf64
+DefaultDirName="{commonpf64}\SVG Explorer Extension"
+#else
+DefaultDirName="{pf64}\SVG Explorer Extension"
+#endif
+#else
+#ifdef commonpf32
+DefaultDirName="{commonpf32}\SVG Explorer Extension"
+#else
+DefaultDirName="{pf32}\SVG Explorer Extension"
+#endif
+#endif
+
 #if arch == "x64"
 ArchitecturesInstallIn64BitMode=x64
 #else
-ArchitecturesInstallIn64BitMode=x86
+ArchitecturesInstallIn64BitMode=
 #endif
 
 [Languages]
