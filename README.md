@@ -17,25 +17,34 @@ Make sure you download the right architecture (the 32 bit installer will run on 
 ### Automatic builds
 Development install exe's are created from every commit through the continual-integration system and can be fetched from:
 
-https://ci.appveyor.com/project/maphew/svg-explorer-extension/build/artifacts
+https://ci.appveyor.com/project/tibold/svg-explorer-extension/build/artifacts
 
-Being dev releases, they might not work.  
-Current status: [![Build status Appveyor](https://ci.appveyor.com/api/projects/status/github/tibold/svg-explorer-extension?svg=true)](https://ci.appveyor.com/project/tibold/svg-explorer-extension) with static analysis result: [![Coverity Scan Build Status](https://scan.coverity.com/projects/20107/badge.svg)](https://scan.coverity.com/projects/svg-viewer-extension-for-windows-explorer)
+Being dev releases, they might not work. Current status: 
+
+[![Build status Appveyor](https://ci.appveyor.com/api/projects/status/u7ybqw5640a5kdid?svg=true)](https://ci.appveyor.com/project/tibold/svg-explorer-extension)
+[![Coverity Scan Build Status](https://scan.coverity.com/projects/20107/badge.svg)](https://scan.coverity.com/projects/svg-viewer-extension-for-windows-explorer)
 
 ## Developer Build Environment c.2019
-Warning: it's many GB. 
+Warning: it's about 10 GB. 
 
-- QtCreator -  `choco install qtcreator`
-- Qt SDK - _MSVC 2017 64-bit_ using Qt Maintenance Tool installed with QtCreator. Might be problems if install MSVC 32 bit at same time.
-- MS Visual Studio - build tools only else many many GB! Reboots necessary, [read the notes](https://chocolatey.org/packages/visualstudio2017buildtools)
-  - `choco install visualstudio2017buildtools` 
-  - `choco install visualstudio2017-workload-vctools`
-- Windows SDK - `choco install windows-sdk-10.-0`
-- Inno Setup v6 - `choco install innosetup`
+- QtCreator
+- Qt SDK - _MSVC 2017 64-bit_ using Qt Maintenance Tool installed with QtCreator. Might be problems if install MSVC 32 bit at same time. (Qt Creator & SDK: 7.2 GB)
+- MS Visual Studio - build tools only else many more GB. Reboots necessary, [read the notes](https://chocolatey.org/packages/visualstudio2017buildtools) (2.5 GB)
+- Windows SDK
+- Inno Setup v6
 
-Installation is with [Chocolatey](https://chocolatey.org/) wherever I have a choice. The list may be incomplete. I've installed and uninstalled several different programs and versions of programs trying to find the right combination.
+[Chocolatey](https://chocolatey.org/) installation:
 
-More info: https://github.com/maphew/svg-explorer-extension/issues/18
+    choco install qtcreator, windows-sdk-10.-0, innosetup
+    choco install visualstudio2017buildtools
+    choco install visualstudio2017-workload-vctools ^
+      --params "--add Microsoft.VisualStudio.Component.VC.Runtimes.x86.x64.Spectre"
+
+**Quick start** after developer env is set:
+
+    git clone https://github.com/tibold/svg-explorer-extension.git
+    cd svg-explorer-extension\deployment
+    .\build.cmd
 
 ## History
 Tibold Kandrai started the project in 2012, first on Google Code, Codeplex. Life happened and Tibold didn't have time to work on it any more, though the extension continued to work more than it didn't so people kept using it. 

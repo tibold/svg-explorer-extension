@@ -1,0 +1,16 @@
+version: 1.0.{build}
+pull_requests:
+  do_not_increment_build_number: true
+image: Visual Studio 2017
+platform: x64
+build_script:
+- pwsh: >-
+    .\deployment\Build.ps1 -Verbose -Architecture x64 -InnoSetupPath "C:\Program Files (x86)\Inno Setup 5"
+
+    .\deployment\Build.ps1 -Verbose -Architecture x86 -InnoSetupPath "C:\Program Files (x86)\Inno Setup 5"
+
+artifacts:
+- path: var/installer/svg_explorer_extension_x64.exe
+  name: installer 64bit
+- path: var/installer/svg_explorer_extension_x86.exe
+  name: installer 32bit
