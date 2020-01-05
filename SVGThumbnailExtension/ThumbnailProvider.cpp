@@ -105,10 +105,13 @@ STDMETHODIMP CThumbnailProvider::Initialize(IStream *pstm,
     STATSTG stat;
     Q_UNUSED(grfMode)
 
+    if(loaded) {
+        return HRESULT_FROM_WIN32(ERROR_ALREADY_INITIALIZED);
+    }
+
     if(pstm->Stat(&stat, STATFLAG_DEFAULT) != S_OK){
         return S_FALSE;
     }
-
 
     char * data = new char[stat.cbSize.QuadPart];
 
@@ -141,6 +144,12 @@ STDMETHODIMP CThumbnailProvider::GetThumbnail(UINT cx,
 {
     *phbmp = NULL;
     *pdwAlpha = WTSAT_ARGB;
+
+#ifdef NDEBUG
+    if(!loaded) {
+        return S_FALSE;
+    }
+#endif
 
     // Fit the render into a (cx * cx) square while maintaining the aspect ratio.
     QSize size = renderer.defaultSize();
@@ -201,8 +210,8 @@ STDMETHODIMP CThumbnailProvider::GetThumbnail(UINT cx,
     delete device;
 
     if( *phbmp != NULL )
-        return NOERROR;
-    return E_NOTIMPL;
+        return S_OK;
+    return S_FALSE;
 }
 
 /*
