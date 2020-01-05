@@ -14,7 +14,7 @@ QApplication * app;
 void Initialize(HMODULE module) {
     int c = 0;
     WCHAR path[2048];
-    memset(path, 0, 2048);
+    ZeroMemory(path, sizeof(path));
     GetModuleFileNameW(module, path, 2048);
     auto modulePath = QString::fromWCharArray(path, 2048);
     QFileInfo dll(modulePath);
