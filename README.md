@@ -18,7 +18,7 @@ Make sure you download the right architecture (the 32 bit installer will run on 
 Development install exe's are created from every commit through the continual-integration system. 
 
 - From https://ci.appveyor.com/project/tibold/svg-explorer-extension/history 
-- Select a recent build showing green, then click** Artifacts**.
+- Select a recent build showing green, then click **Artifacts**.
 
 Being dev releases, they might not work. Current status: [![Build status Appveyor](https://ci.appveyor.com/api/projects/status/github/tibold/svg-explorer-extension?svg=true)](https://ci.appveyor.com/project/tibold/svg-explorer-extension)  
 
