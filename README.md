@@ -19,7 +19,7 @@ Development install exe's are created from every commit through the continual-in
 
 https://ci.appveyor.com/project/tibold/svg-explorer-extension/build/artifacts
 
-Being dev releases, they might not work. Current status: [![Build status Appveyor](https://ci.appveyor.com/api/projects/status/github/maphew/svg-explorer-extension?svg=true)](https://ci.appveyor.com/project/maphew/svg-explorer-extension)  
+Being dev releases, they might not work. Current status: [![Build status Appveyor](https://ci.appveyor.com/api/projects/status/github/tibold/svg-explorer-extension?svg=true)](https://ci.appveyor.com/project/tibold/svg-explorer-extension)  
 
 ## Developer Build Environment c.2019
 Warning: it's about 10 GB. 
