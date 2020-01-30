@@ -17,7 +17,7 @@ Make sure you download the right architecture (the 32 bit installer will run on 
 ### Automatic builds
 Development install exe's are created from every commit through the continual-integration system and can be fetched from:
 
-https://ci.appveyor.com/project/maphew/svg-explorer-extension/build/artifacts
+https://ci.appveyor.com/project/tibold/svg-explorer-extension/build/artifacts
 
 Being dev releases, they might not work. Current status: [![Build status Appveyor](https://ci.appveyor.com/api/projects/status/github/maphew/svg-explorer-extension?svg=true)](https://ci.appveyor.com/project/maphew/svg-explorer-extension)  
 
