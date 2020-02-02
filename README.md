@@ -12,16 +12,24 @@ From _[Releases](https://github.com/tibold/svg-explorer-extension/releases)_ dow
 ----
 > Thumbnails do no show after installation
 
-This may happen if the system already contains cached thumbnails for the SVGs you are trying to view. This can be fixed by clearing the system's thumbnail cache.
-
 ### Method 1:
+
+This may happen if the thumbnail's are disabled in the system. To verify that it is indeed turned on:
+
+* Open the start menu
+* Search for `File Explorer Options` and open it
+* Under the `View` tab make sure that the `Always show icons, never thumbnails` is __unchecked__
+
+### Method 2:
+
+This may happen if the system already contains cached thumbnails for the SVGs you are trying to view. This can be fixed by clearing the system's thumbnail cache.
 
 * Open the start menu
 * Search for "Disk cleanup" and open it
 * In the dialog there is a list of items that can be cleaned. Select `Thumbnails` at the end of the list. You may unselect the rest or leave the default selection.
 * Click `OK`
 
-### Method 2
+### Method 3:
 
 Kill `explorer.exe` and delete the icon cache manually
 ([ref](https://superuser.com/questions/342052/how-to-get-svg-thumbnails-in-windows-explorer)):
