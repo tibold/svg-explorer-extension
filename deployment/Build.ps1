@@ -159,7 +159,7 @@ function Protect-Installer {
     Write-Verbose "Signing installer"
 
     # Sign the installer
-    gpg --detach-sign --armor -o "$installerPath.sig" "$installerPath" | Write-Verbose
+    gpg --detach-sign --armor --yes -o "$installerPath.sig" "$installerPath" | Write-Verbose
     Assert-LastExitCode "Failed to sign installer."
 
     # Verify the signature
