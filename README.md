@@ -46,14 +46,12 @@ If neither of the above helped please open an issue on our github page.
 Please open an issue on our github page, and include a screen shot and the exact error message.
 
 ### Automatic builds
-Development install exe's are created from every commit through the continual-integration system and can be fetched from:
+Development install exe's are created from every commit through the continual-integration system. 
 
-https://ci.appveyor.com/project/tibold/svg-explorer-extension/build/artifacts
+- From https://ci.appveyor.com/project/tibold/svg-explorer-extension/history 
+- Select a recent build showing green, then click **Artifacts**.
 
-Being dev releases, they might not work. Current status: 
-
-[![Build status Appveyor](https://ci.appveyor.com/api/projects/status/u7ybqw5640a5kdid?svg=true)](https://ci.appveyor.com/project/tibold/svg-explorer-extension)
-[![Coverity Scan Build Status](https://scan.coverity.com/projects/20107/badge.svg)](https://scan.coverity.com/projects/svg-viewer-extension-for-windows-explorer)
+Being dev releases, they might not work. Current status: [![Build status Appveyor](https://ci.appveyor.com/api/projects/status/github/tibold/svg-explorer-extension?svg=true)](https://ci.appveyor.com/project/tibold/svg-explorer-extension)  
 
 ## Developer Build Environment c.2019
 Warning: it's about 10 GB. 
