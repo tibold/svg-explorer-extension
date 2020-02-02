@@ -32,6 +32,10 @@ Param(
     [Parameter()]
     [switch] $BuildInstaller = [switch]::Present,
     
+    # Parameter help description
+    [Parameter()]
+    [switch] $SignInstaller,
+    
     [Parameter()]
     [string] $InnoSetupPath = 'C:\Program Files (x86)\Inno Setup 6'
 )
@@ -50,6 +54,7 @@ $binary = Join-Path $distDir "$ProjectName.dll"
 $buildDir = Join-Path $rootFolder "var/build/$Architecture"
 $projectFile = Resolve-Path (Join-Path $rootFolder "$ProjectName/$ProjectName.pro")
 $licenseDir = Join-Path $rootFolder 'var/licenses'
+$installerDir = Join-Path $rootFolder 'var/installer'
 
 function Initialize-Environment {
 
@@ -143,9 +148,28 @@ function Build-Installer {
     }
 }
 
+function Protect-Installer {
+
+    Write-Verbose "Signing installer"
+
+    Push-Location $rootFolder
+    try {
+        $installers = Get-ChildItem -Path $installerDir -Filter "*.exe"
+        foreach($installer in $installers) {
+            gpg --detach-sign --armor -o "$($installer.FullName).asc" "$($installer.FullName)" | Write-Verbose
+        }
+    }
+    finally {
+        Pop-Location
+    }
+}
+
 Initialize-Environment
 Build-Application
 Publish-Application
 if ($BuildInstaller) {
     Build-Installer
+    if($SignInstaller) {
+        Protect-Installer
+    }
 }
