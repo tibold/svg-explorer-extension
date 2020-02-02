@@ -32,6 +32,10 @@ Param(
     [Parameter()]
     [switch] $BuildInstaller = [switch]::Present,
     
+    # Parameter help description
+    [Parameter()]
+    [switch] $SignInstaller,
+    
     [Parameter()]
     [string] $InnoSetupPath = 'C:\Program Files (x86)\Inno Setup 6'
 )
@@ -50,6 +54,8 @@ $binary = Join-Path $distDir "$ProjectName.dll"
 $buildDir = Join-Path $rootFolder "var/build/$Architecture"
 $projectFile = Resolve-Path (Join-Path $rootFolder "$ProjectName/$ProjectName.pro")
 $licenseDir = Join-Path $rootFolder 'var/licenses'
+$installerDir = Join-Path $rootFolder 'var/installer'
+$installerPath = Join-Path $installerDir "svg_explorer_extension_$Architecture.exe"
 
 function Initialize-Environment {
 
@@ -86,6 +92,10 @@ function Initialize-Environment {
     if ($BuildInstaller) {
         # Setup "Inno Setup" build environment
         Use-InnoSetup -InstallPath $InnoSetupPath
+
+        if($SignInstaller) {
+            Use-OpenGPG
+        }
     }
 }
 
@@ -137,10 +147,26 @@ function Build-Installer {
     try {
         $issFile = Join-Path $rootFolder "deployment/${ProjectName}.iss";
         iscc "/darch=$Architecture" "$issFile" | Write-Verbose
+        Assert-LastExitCode "Failed to build installer"
     }
     finally {
         Pop-Location
     }
+}
+
+function Protect-Installer {
+
+    Write-Verbose "Signing installer"
+
+    # Sign the installer
+    gpg --detach-sign --armor --yes -o "$installerPath.sig" "$installerPath" | Write-Verbose
+    Assert-LastExitCode "Failed to sign installer."
+
+    # Verify the signature
+    gpg --verify "$installerPath.sig" "$installerPath" | Write-Verbose
+    Assert-LastExitCode "Failed to verify signed installer."
+
+    Write-Verbose "Installer signed successfully"
 }
 
 Initialize-Environment
@@ -148,4 +174,7 @@ Build-Application
 Publish-Application
 if ($BuildInstaller) {
     Build-Installer
+    if($SignInstaller) {
+        Protect-Installer
+    }
 }

@@ -34,3 +34,15 @@ function Use-InnoSetup {
 
     $env:Path = "$InstallPath;$env:Path"
 }
+
+function Use-OpenGPG {
+    [CmdletBinding()]
+    param()
+
+    if(-not (Get-Command 'gpg' -ErrorAction 'SilentlyContinue')) {
+        $gitCommand = Get-Command 'git' -ErrorAction 'Stop'
+        $usrBinPath = Resolve-Path (Join-Path (Split-Path -Path $gitCommand.Source -Parent) '../usr/bin')
+
+        $env:Path += ";$usrBinPath"
+    }
+}
