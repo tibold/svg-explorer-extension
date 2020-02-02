@@ -3,16 +3,39 @@
 Extension module for Windows Explorer to render SVG thumbnails, so that you can have an overview of your SVG files.
 
 ## Installation
-From _[Releases](https://github.com/tibold/svg-explorer-extension/releases)_ download and run appropriate binary for your system. Note: you probably need an _unsigned_ version as the signed binary certificate was revoked (#29) around Dec 2019.
+From _[Releases](https://github.com/tibold/svg-explorer-extension/releases)_ download and run appropriate binary for your system. There are no further actions required after installations.
 
-Then kill `explorer.exe` and icon cache
+> Make sure you download the right architecture (the 32 bit installer will run on a 64 bit system, but the extension will not function).
+
+## Troubleshooting
+
+----
+> Thumbnails do no show after installation
+
+This may happen if the system already contains cached thumbnails for the SVGs you are trying to view. This can be fixed by clearing the system's thumbnail cache.
+
+### Method 1:
+
+* Open the start menu
+* Search for "Disk cleanup" and open it
+* In the dialog there is a list of items that can be cleaned. Select `Thumbnails` at the end of the list. You may unselect the rest or leave the default selection.
+* Click `OK`
+
+### Method 2
+
+Kill `explorer.exe` and delete the icon cache manually
 ([ref](https://superuser.com/questions/342052/how-to-get-svg-thumbnails-in-windows-explorer)):
    
     TASKKILL /IM explorer* /F
     DEL "%localappdata%\IconCache.db" /A
     explorer.exe
-   
-Make sure you download the right architecture (the 32 bit installer will run on a 64 bit system, but the extension will not function).
+
+If neither of the above helped please open an issue on our github page.
+
+----
+> An error is thrown during the installation.
+
+Please open an issue on our github page, and include a screen shot and the exact error message.
 
 ### Automatic builds
 Development install exe's are created from every commit through the continual-integration system and can be fetched from:
