@@ -49,14 +49,10 @@ Name: "en"; MessagesFile: "compiler:Default.isl"; LicenseFile: "..\LICENSE.md"
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 Source: "..\var\dist\{#arch}\release\*"; DestDir: "{app}"; Flags: recursesubdirs                   
 Source: "..\var\dist\{#arch}\release\SVGThumbnailExtension.dll"; DestDir: "{app}"; Flags: regserver           
-Source: "..\var\dist\{#arch}\release\vc_redist.{#arch}.exe"; DestDir: "{tmp}"; Flags: deleteafterinstall
 ; Licenses
 ; FIXME: the qt license should not be stored in this repository but be copied from the qt distribution
 Source: "..\var\licenses\Qt.txt"; DestDir: "{app}\license\";
 Source: "..\LICENSE.md"; DestDir: "{app}\license\";
-
-[Run]
-Filename: "{tmp}\vc_redist.{#arch}.exe"; Parameters: "/install /passive /norestart"; StatusMsg: "Installing VC++ 2017 runtime"
 
 [Code]
 
@@ -72,5 +68,7 @@ Begin
       //MsgBox('Your previously installed version will be uninstalled first.', mbInformation, MB_OK);
       Exec(RemoveQuotes(Uninstaller), ' /SILENT', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ResultCode);
     End;
+    ExtractTemporaryFile(ExpandConstant('vc_redist.{#arch}.exe'));
+    Exec(ExpandConstant('{tmp}\vc_redist.{#arch}.exe'), '/install /passive /norestart', '', SW_SHOWNORMAL, ewWaitUntilTerminated,ResultCode);
   End;
 End;
