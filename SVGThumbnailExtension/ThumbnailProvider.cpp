@@ -5,9 +5,11 @@
 #include <assert.h>
 
 #include <QtCore/QDateTime>
+#ifndef NDEBUG
+#include <QtCore/QString>
 #include <QtCore/QDir>
 #include <QtCore/QFile>
-#include <QtCore/QString>
+#endif
 #include <QtGui/QImage>
 #include <QtGui/QPainter>
 #include <QtGui/QPixmap>
@@ -103,10 +105,13 @@ STDMETHODIMP CThumbnailProvider::Initialize(IStream *pstm,
     STATSTG stat;
     Q_UNUSED(grfMode)
 
+    if(loaded) {
+        return HRESULT_FROM_WIN32(ERROR_ALREADY_INITIALIZED);
+    }
+
     if(pstm->Stat(&stat, STATFLAG_DEFAULT) != S_OK){
         return S_FALSE;
     }
-
 
     char * data = new char[stat.cbSize.QuadPart];
 
@@ -139,6 +144,12 @@ STDMETHODIMP CThumbnailProvider::GetThumbnail(UINT cx,
 {
     *phbmp = NULL;
     *pdwAlpha = WTSAT_ARGB;
+
+#ifdef NDEBUG
+    if(!loaded) {
+        return S_FALSE;
+    }
+#endif
 
     // Fit the render into a (cx * cx) square while maintaining the aspect ratio.
     QSize size = renderer.defaultSize();
@@ -190,7 +201,7 @@ STDMETHODIMP CThumbnailProvider::GetThumbnail(UINT cx,
     // Old syntax: HBITMAP QPixmap::toWinHBITMAP(HBitmapFormat format = NoAlpha) const
     // New syntax: HBITMAP QtWin::toHBITMAP(const QPixmap &p, QtWin::HBitmapFormat format = HBitmapNoAlpha)
 #if QT_VERSION < 0x050200
-    *phbmp = QPixmap::fromImage(device).toWinHBITMAP(QPixmap::Alpha);
+    *phbmp = QPixmap::fromImage(*device).toWinHBITMAP(QPixmap::Alpha);
 #else
     *phbmp = QtWin::toHBITMAP(QPixmap::fromImage(*device), QtWin::HBitmapAlpha);
 #endif
@@ -199,8 +210,8 @@ STDMETHODIMP CThumbnailProvider::GetThumbnail(UINT cx,
     delete device;
 
     if( *phbmp != NULL )
-        return NOERROR;
-    return E_NOTIMPL;
+        return S_OK;
+    return S_FALSE;
 }
 
 /*

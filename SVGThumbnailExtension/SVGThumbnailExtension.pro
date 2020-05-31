@@ -7,8 +7,9 @@
 QT       += svg
 QT       += winextras
 
-TARGET = SVGThumbnailExtension
+TARGET = SvgSee
 TEMPLATE = lib
+CONFIG += c++1z
 
 CONFIG(release, debug|release):DEFINES += NDEBUG
 
@@ -25,6 +26,7 @@ SOURCES += \
     ClassFactory.cpp
 
 HEADERS +=\
+    Logging.h \
     Registry.h \
     ThumbnailProvider.h \
     ClassFactory.h \
