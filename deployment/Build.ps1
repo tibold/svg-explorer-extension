@@ -12,7 +12,7 @@ Param(
     [string] $Architecture = 'x64',
 
     [Parameter()]
-    [ValidateSet('2015', '2017')]
+    [ValidateSet('2015', '2017', '2019')]
     [string] $VSVersion = '2017',
 
     [Parameter()]
@@ -23,7 +23,7 @@ Param(
     [string] $WinSdk = '10.0.17763.0',
     
     [Parameter()]
-    [string] $QtVersion = '5.12.*',
+    [string] $QtVersion,
     
     [Parameter()]
     [string] $QtInstallPath = 'C:\Qt\',
@@ -42,6 +42,13 @@ Param(
 
 $ErrorActionPreference = 'stop'
 
+if(-not $QtVersion){
+    switch ($VSVersion) {
+        '2019' { $QtVersion = '5.15.*' }
+        Default { $QtVersion = '5.12.*'}
+    }
+}
+
 Import-Module (Join-Path $PSScriptRoot 'Modules/Qt.psd1')
 Import-Module (Join-Path $PSScriptRoot 'Modules/VisualStudio.psd1')
 
@@ -50,7 +57,7 @@ Write-Verbose "Setting up development environment."
 $rootFolder = Resolve-Path (Join-Path  $PSScriptRoot '..')
 
 $distDir = Join-Path $rootFolder "var/dist/$Architecture/$Configuration"
-$binary = Join-Path $distDir "$ProjectName.dll"
+$binary = Join-Path $distDir "SvgSee.dll"
 $buildDir = Join-Path $rootFolder "var/build/$Architecture"
 $projectFile = Resolve-Path (Join-Path $rootFolder "$ProjectName/$ProjectName.pro")
 $licenseDir = Join-Path $rootFolder 'var/licenses'

@@ -98,6 +98,7 @@ function Use-VisualStudio{
     $variables | .{process{
         if($_ -match '^\[ERROR:.*\]') {
             # Throw when vcvarsall.bat reported an error.
+            $variables | Write-Verbose
             throw "Failed to configure Visual Studio: $_"
         }
         if ($_ -match '^([^=]+)=(.*)') {
