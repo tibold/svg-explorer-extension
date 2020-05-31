@@ -7,7 +7,7 @@
 QT       += svg
 QT       += winextras
 
-TARGET = SVGThumbnailExtension
+TARGET = SvgSee
 TEMPLATE = lib
 CONFIG += c++1z
 

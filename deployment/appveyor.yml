@@ -10,7 +10,7 @@ build_script:
     .\deployment\Build.ps1 -Verbose -Architecture x86 -InnoSetupPath "C:\Program Files (x86)\Inno Setup 5"
 
 artifacts:
-- path: var/installer/svg_explorer_extension_x64.exe
+- path: var/installer/svg_see_x64.exe
   name: installer 64bit
-- path: var/installer/svg_explorer_extension_x86.exe
+- path: var/installer/svg_see_x86.exe
   name: installer 32bit

@@ -55,7 +55,7 @@ $buildDir = Join-Path $rootFolder "var/build/$Architecture"
 $projectFile = Resolve-Path (Join-Path $rootFolder "$ProjectName/$ProjectName.pro")
 $licenseDir = Join-Path $rootFolder 'var/licenses'
 $installerDir = Join-Path $rootFolder 'var/installer'
-$installerPath = Join-Path $installerDir "svg_explorer_extension_$Architecture.exe"
+$installerPath = Join-Path $installerDir "svg_see_$Architecture.exe"
 
 function Initialize-Environment {
 
