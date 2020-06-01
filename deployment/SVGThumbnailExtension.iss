@@ -9,7 +9,7 @@
 AppId={{4CA20D9A-98AC-4DD6-9C16-7449F29AC08A}
 AppMutex=github_tibold_svg_explorer_extension
 AppName="SVG See"
-AppVersion="1.0.0"
+AppVersion="1.1.0"
 AppVerName="SVG See 1.1.0"
 AppPublisher="Tibold Kandrai"
 AppPublisherURL=https://tibold.kandrai.rocks/
